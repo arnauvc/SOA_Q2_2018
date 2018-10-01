@@ -118,7 +118,7 @@ ENTRY(syscall_handler_sysenter)
 sysenter_err:
     movl $-ENOSYS, %EAX
 sysenter_fin:
-    movl %EAX, 0x18(%ESO)
+    movl %EAX, 0x18(%ESP)
     RESTORE_ALL
     movl (%ESP), %EDX
     movl 12(%ESP), %ECX
