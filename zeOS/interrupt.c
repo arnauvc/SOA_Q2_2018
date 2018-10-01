@@ -99,8 +99,20 @@ void clock_routine() {
 }
 
 
+int sys_write(int fd, char * buffer, int size){
+  /*
+  Check user parameters
+    -fd
+    -buffer
+    -size
+  Copy data from/to user address space
 
-//int sys_write_console (char *buffer, int size) {}
+  int sys_write_console (char *buffer, int size);
+
+  return result
+  */
+}
+
 
 
 void setIdt()

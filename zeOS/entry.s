@@ -60,7 +60,7 @@ fin:
 sysenter_err:
     movl $-ENOSYS, %EAX
 sysenter_fin:
-    movl %EAX, 0x18(%ESO)
+    movl %EAX, 0x18(%ESP)
     popl %ebx; popl %ecx; popl %edx; popl %esi; popl %edi; popl %ebp; popl %eax; popl %ds; popl %es; popl %fs; popl %gs;
     movl (%ESP), %EDX
     movl 12(%ESP), %ECX

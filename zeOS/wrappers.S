@@ -1,5 +1,14 @@
 #include <asm.h>
 ENTRY(write)
+	
+	#REGISTERS
+	#MOV 4, %EAX
+	#SYSENTER $0x80
+	#PROCESS RESULT
+	#SYSEXIT
+	#RETURN
+
+
 
 	mov 4, %EAX
 	sysenter $0x80
