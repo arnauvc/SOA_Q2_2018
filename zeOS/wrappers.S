@@ -11,7 +11,7 @@ ENTRY(write)
 	cmp %eax, $0
 	jge return
 	movl $-ENOSYS, %eax
-	j fi
+	jmp fi
 return:
 	mov %ebp, %esp
 	pop %ebx
@@ -22,5 +22,14 @@ fi:
 
 
 ENTRY(gettime)
+	mov 10, %eax
+	sysenter %0x80
+	cmp %eax, $0
+	jge return
+	movl $-ENOSYS, %eax
+	jmp fi
+return:
+	sysexit
+fi:
 
 		
