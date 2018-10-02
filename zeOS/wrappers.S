@@ -27,9 +27,7 @@ ENTRY(gettime)
 	cmp %eax, $0
 	jge return
 	movl $-ENOSYS, %eax
-	jmp fi
 return:
 	sysexit
-fi:
 
 		
