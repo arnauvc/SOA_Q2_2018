@@ -1,31 +1,26 @@
 #include <asm.h>
 ENTRY(write)
-	
-	#REGISTERS
-	#MOV 4, %EAX
-	#SYSENTER $0x80
-	#PROCESS RESULT
-	#SYSEXIT
-	#RETURN
-
-
-
+	push %ebp
+	push %ebx
+	mov %esp, %ebp
+	mov 16(%ebp), %edx
+	mov 12(%ebp), %ecx
+	mov 8(%ebp), %ebx  
 	mov 4, %EAX
 	sysenter $0x80
-	push %ecx
-	push %edx
-	push %esp
-	push %eip
-	push %ebp
 	cmp %eax, $0
-	sysenter $0x80
 	jge return
-	mul -1, %eax
-	mov
+	movl $-ENOSYS, %eax
+	j fi
 return:
+	mov %ebp, %esp
+	pop %ebx
 	pop %ebp
-	pop %eip
-	pop %esp
-	pop %edx
-	pop %ecx
 	sysexit
+fi:
+
+
+
+ENTRY(gettime)
+
+		

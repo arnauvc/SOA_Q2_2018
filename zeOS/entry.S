@@ -4,6 +4,7 @@
 
 #include <asm.h>
 #include <segment.h>
+#include <errno.h>
 
 
 /**************************************************/
@@ -124,3 +125,10 @@ sysenter_fin:
     movl 12(%ESP), %ECX
     sti
     sysexit
+
+
+ENTRY(write_msr)
+    mov $0, %edx
+    mov %ebx, %eax
+    wrmsr
+    ret

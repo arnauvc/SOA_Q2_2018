@@ -13,7 +13,9 @@
 # 6 "entry.S" 2
 # 1 "include/segment.h" 1
 # 7 "entry.S" 2
-# 75 "entry.S"
+# 1 "include/errno.h" 1
+# 8 "entry.S" 2
+# 76 "entry.S"
 .globl keyboard_handler; .type keyboard_handler, @function; .align 0; keyboard_handler:
       pushl %gs; pushl %fs; pushl %es; pushl %ds; pushl %eax; pushl %ebp; pushl %edi; pushl %esi; pushl %edx; pushl %ecx; pushl %ebx; movl $0x18, %edx; movl %edx, %ds; movl %edx, %es
       call keyboard_routine;
@@ -37,7 +39,7 @@
     call *sys_call_table(, %eax, 0x04); jmp fin
 
 err:
-    movl $-ENOSYS, %eax
+    movl $-38, %eax
 fin:
     movl %EAX, 0x18(%esp)
     popl %ebx; popl %ecx; popl %edx; popl %esi; popl %edi; popl %ebp; popl %eax; popl %ds; popl %es; popl %fs; popl %gs;; iret;
@@ -58,7 +60,7 @@ fin:
     call *sys_call_table(, %EAX, 0x04)
     jmp sysenter_fin
 sysenter_err:
-    movl $-ENOSYS, %EAX
+    movl $-38, %EAX
 sysenter_fin:
     movl %EAX, 0x18(%ESP)
     popl %ebx; popl %ecx; popl %edx; popl %esi; popl %edi; popl %ebp; popl %eax; popl %ds; popl %es; popl %fs; popl %gs;
@@ -66,3 +68,10 @@ sysenter_fin:
     movl 12(%ESP), %ECX
     sti
     sysexit
+
+
+.globl write_msr; .type write_msr, @function; .align 0; write_msr:
+    mov $0, %edx
+    mov %ebx, %eax
+    wrmsr
+    ret

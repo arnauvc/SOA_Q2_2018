@@ -6,8 +6,9 @@
 #include <segment.h>
 #include <hardware.h>
 #include <io.h>
-
+#include <errno.h>
 #include <zeos_interrupt.h>
+#include <system.h>
 
 Gate idt[IDT_ENTRIES];
 Register    idtR;
@@ -15,6 +16,7 @@ Register    idtR;
 void keyboard_handler();
 void clock_handler();
 void system_call_handler();
+int write_msr(int val_msr, int num_msr);
 
 char char_map[] =
 {
@@ -33,7 +35,6 @@ char char_map[] =
   '\0','\0'
 };
 
-int zeos_ticks = 0;
 
 void setInterruptHandler(int vector, void (*handler)(), int maxAccessibleFromPL)
 {
@@ -93,26 +94,12 @@ void keyboard_routine() {
 	}
 }
 
-void clock_routine() {
+int zeos_ticks = 0;
+int clock_routine() {
   ++zeos_ticks;
   zeos_show_clock();
+  return 0;
 }
-
-
-int sys_write(int fd, char * buffer, int size){
-  /*
-  Check user parameters
-    -fd
-    -buffer
-    -size
-  Copy data from/to user address space
-
-  int sys_write_console (char *buffer, int size);
-
-  return result
-  */
-}
-
 
 
 void setIdt()
@@ -127,6 +114,9 @@ void setIdt()
   setInterruptHandler(33, keyboard_handler, 0);
   setTrapHandler(0x80, system_call_handler, 3);
   setInterruptHandler(32, clock_handler, 0);
+  write_msr(__KERNEL_CS, 0x174);
+  write_msr(INITIAL_ESP, 0x175);
+  write_msr(system_call_handler, 0x176);
 
   set_idt_reg(&idtR);
 }

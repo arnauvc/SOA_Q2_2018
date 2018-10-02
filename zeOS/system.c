@@ -60,6 +60,7 @@ inline void set_seg_regs(Word data_sel, Word stack_sel, DWord esp)
 int __attribute__((__section__(".text.main")))
   main(void)
 {
+  //int zeos_ticks = 0;
 
   set_eflags();
 

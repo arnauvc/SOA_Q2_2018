@@ -17,16 +17,40 @@
 #define ESCRIPTURA 1
 
 
-int sys_write(int fd, char *buffer, int size) {
+extern int zeos_ticks;
 
+int sys_write(int fd, char * buffer, int size) {
+  /*
+  Check user parameters
+    -fd
+    -buffer
+    -size
+  Copy data from/to user address space
 
+  int sys_write_console (char *buffer, int size);
 
+  return result
+  */
+	int comprovar = check_fd(fd,ESCRIPTURA);
+	if (comprovar != 0) return -1;
+	if (buffer == NULL) return -1;
+	if (size <= 0) return -1;
+	char bufferdest[4096]; 
+	int size_escriure = size;
+	char * buffer_escriure = buffer;
 
+	while (size_escriure > 4096) {
+		if (copy_from_user(buffer_escriure, bufferdest, 4096) != 0) return -1;
+		if (sys_write_console(buffer_escriure, 4096) <= 0) return -1;
+		size_escriure -= 4096;
+		buffer_escriure = *buffer_escriure + 4096;
+	} 
+	return 0;
 }
 
 
 int sys_gettime() {
-  return zeos_ticks();
+  return zeos_ticks;
 }
 
 
