@@ -29,17 +29,20 @@ long outer(long n)
 	return acum;
 }
 
+char buffer[32] = "abc";
+
 int __attribute__ ((__section__(".text.main")))
   main(void)
 {
+	/*
 	long count, acum, sum;
 	count = 75;
 	acum = 0;
 	acum = outer(count);
 	sum = add2(1,2);
-	char buffer[48] = {'a','b','c'};
+	*/
 	
-	write(1, buffer, 48);
+	write(1, buffer, 32);
 	while (1);
 	return 0;
     /* Next line, tries to move value 0 to CR3 register. This register is a privileged one, and so it will raise an exception */

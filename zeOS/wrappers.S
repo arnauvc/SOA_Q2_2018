@@ -3,31 +3,56 @@
 
 ENTRY(write)
 	push %ebp
-	push %ebx
 	mov %esp, %ebp
-	mov 16(%ebp), %edx
+
+	push %ebx
+	push %esi
+
+	mov 8(%ebp), %ebx
 	mov 12(%ebp), %ecx
-	mov 8(%ebp), %ebx  
-	mov 4, %EAX
-	sysenter
-	cmpl $0, %eax
-	jge return2
-	movl $-ENOSYS, %eax
+	mov 16(%ebp), %edx
 	
-return2:
-	mov %ebp, %esp
-	pop %ebx
+	mov $4, %EAX
+	
+	push %ecx
+	push %edx
+	lea return1, %esi
+	push %esi
+	push %ebp
+	mov %esp, %ebp
+	sysenter
+
+return1:
 	pop %ebp
-	sysexit
+	pop %esi
+	pop %edx
+	pop %ecx
+	
+	cmpl $0, %eax
+	jge fi
+
+err:
+	neg %eax
+	mov %eax, errno
+	mov $(-1), %eax
+
+fi:
+	pop %esi
+	pop %ebx
+
+	pop %ebp
+	ret
+	
 
 
 ENTRY(gettime)
 	mov 10, %eax
 	sysenter
 	cmpl $0, %eax
-	jge return1
+	jge return3
 	movl $-ENOSYS, %eax
-return1:
-	sysexit
+return3:
+	ret
+	#sysexit
 
 		

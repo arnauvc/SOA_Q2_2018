@@ -12,29 +12,54 @@
 
 .globl write; .type write, @function; .align 0; write:
  push %ebp
- push %ebx
  mov %esp, %ebp
- mov 16(%ebp), %edx
- mov 12(%ebp), %ecx
- mov 8(%ebp), %ebx
- mov 4, %EAX
- sysenter
- cmpl $0, %eax
- jge return2
- movl $-38, %eax
 
-return2:
- mov %ebp, %esp
- pop %ebx
+ push %ebx
+ push %esi
+
+ mov 8(%ebp), %ebx
+ mov 12(%ebp), %ecx
+ mov 16(%ebp), %edx
+
+ mov $4, %EAX
+
+ push %ecx
+ push %edx
+ lea return1, %esi
+ push %esi
+ push %ebp
+ mov %esp, %ebp
+ sysenter
+
+return1:
  pop %ebp
- sysexit
+ pop %esi
+ pop %edx
+ pop %ecx
+
+ cmpl $0, %eax
+ jge fi
+
+err:
+ neg %eax
+ mov %eax, errno
+ mov $(-1), %eax
+
+fi:
+ pop %esi
+ pop %ebx
+
+ pop %ebp
+ ret
+
 
 
 .globl gettime; .type gettime, @function; .align 0; gettime:
  mov 10, %eax
  sysenter
  cmpl $0, %eax
- jge return1
+ jge return3
  movl $-38, %eax
-return1:
- sysexit
+return3:
+ ret
+ #sysexit

@@ -27,6 +27,8 @@ int check_fd(int fd, int permissions)
   return 0;
 }
 
+char bufferdest[4096]; 
+
 int sys_write(int fd, char * buffer, int size) {
   /*
   Check user parameters
@@ -44,16 +46,24 @@ int sys_write(int fd, char * buffer, int size) {
 	if (comprovar != 0) return -1;
 	if (buffer == NULL) return -1;
 	if (size <= 0) return -1;
-	char bufferdest[4096]; 
+
+	
+	//char bufferdest[4096]; 
 	int size_escriure = size;
 	char * buffer_escriure = buffer;
+	if(size > 4096){	
+		while (size_escriure > 4096) {
+			if (copy_from_user(buffer_escriure, bufferdest, 4096) != 0) return -1;
+			if (sys_write_console(bufferdest, 4096) <= 0) return -1;
+			size_escriure -= 4096;
+			buffer_escriure = buffer_escriure + 4096;
+		} 
+	}
+	else{
+		if (copy_from_user(buffer, bufferdest, 4096) != 0) return -1;
+		if (sys_write_console(bufferdest, size) <= 0) return -1;
+	}
 
-	while (size_escriure > 4096) {
-		if (copy_from_user(buffer_escriure, bufferdest, 4096) != 0) return -1;
-		if (sys_write_console(bufferdest, 4096) <= 0) return -1;
-		size_escriure -= 4096;
-		buffer_escriure = buffer_escriure + 4096;
-	} 
 	return 0;
 	
 
