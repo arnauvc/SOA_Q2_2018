@@ -16,6 +16,7 @@ Register    idtR;
 void keyboard_handler();
 void clock_handler();
 void system_call_handler();
+void syscall_handler_sysenter();
 int write_msr(int val_msr, int num_msr);
 
 char char_map[] =
@@ -112,11 +113,11 @@ void setIdt()
 
   /* ADD INITIALIZATION CODE FOR INTERRUPT VECTOR */
   setInterruptHandler(33, keyboard_handler, 0);
-  setTrapHandler(0x80, system_call_handler, 3);
+  //setTrapHandler(0x80, system_call_handler, 3);
   setInterruptHandler(32, clock_handler, 0);
-  write_msr(__KERNEL_CS, 0x174);
-  write_msr(INITIAL_ESP, 0x175);
-  write_msr(system_call_handler, 0x176);
+  int error1 = write_msr(__KERNEL_CS, 0x174);
+  int error2 = write_msr(INITIAL_ESP, 0x175);
+  int error3 = write_msr((int)syscall_handler_sysenter, 0x176);
 
   set_idt_reg(&idtR);
 }

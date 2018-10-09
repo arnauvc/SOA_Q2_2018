@@ -19,6 +19,14 @@
 
 extern int zeos_ticks;
 
+
+int check_fd(int fd, int permissions)
+{
+  if (fd!=1) return -9; /*EBADF*/
+  if (permissions!=ESCRIPTURA) return -13; /*EACCES*/
+  return 0;
+}
+
 int sys_write(int fd, char * buffer, int size) {
   /*
   Check user parameters
@@ -31,6 +39,7 @@ int sys_write(int fd, char * buffer, int size) {
 
   return result
   */
+	
 	int comprovar = check_fd(fd,ESCRIPTURA);
 	if (comprovar != 0) return -1;
 	if (buffer == NULL) return -1;
@@ -41,11 +50,14 @@ int sys_write(int fd, char * buffer, int size) {
 
 	while (size_escriure > 4096) {
 		if (copy_from_user(buffer_escriure, bufferdest, 4096) != 0) return -1;
-		if (sys_write_console(buffer_escriure, 4096) <= 0) return -1;
+		if (sys_write_console(bufferdest, 4096) <= 0) return -1;
 		size_escriure -= 4096;
-		buffer_escriure = *buffer_escriure + 4096;
+		buffer_escriure = buffer_escriure + 4096;
 	} 
 	return 0;
+	
+
+
 }
 
 
@@ -54,12 +66,7 @@ int sys_gettime() {
 }
 
 
-int check_fd(int fd, int permissions)
-{
-  if (fd!=1) return -9; /*EBADF*/
-  if (permissions!=ESCRIPTURA) return -13; /*EACCES*/
-  return 0;
-}
+
 
 int sys_ni_syscall()
 {

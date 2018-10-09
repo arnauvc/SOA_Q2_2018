@@ -1,6 +1,6 @@
 00000000000i[      ] Bochs x86 Emulator 2.6.7
 00000000000i[      ]   Built from SVN snapshot on November 2, 2014
-00000000000i[      ] Compiled on Jun 28 2017 at 12:45:32
+00000000000i[      ] Compiled on Jun 28 2017 at 12:46:11
 00000000000i[      ] System configuration
 00000000000i[      ]   processors: 1 (cores=1, HT threads=1)
 00000000000i[      ]   A20 line support: yes
@@ -31,17 +31,17 @@
 00000000000i[      ]   SB16 support: no
 00000000000i[      ]   USB support: no
 00000000000i[      ]   VGA extension support: vbe
-00000000000i[MEM0  ] allocated memory at 0x7f9ce2197010. after alignment, vector=0x7f9ce2198000
+00000000000i[MEM0  ] allocated memory at 0x7f871ca1c010. after alignment, vector=0x7f871ca1d000
 00000000000i[MEM0  ] 16,00MB
 00000000000i[MEM0  ] mem block size = 0x00100000, blocks=16
-00000000000i[MEM0  ] rom at 0xfffe0000/131072 ('/opt/bochs/share/bochs/BIOS-bochs-latest')
+00000000000i[MEM0  ] rom at 0xfffe0000/131072 ('/opt/bochs_gdb/share/bochs/BIOS-bochs-latest')
 00000000000i[PLUGIN] init_dev of 'pci' plugin device by virtual method
 00000000000i[DEV   ] i440FX PMC present at device 0, function 0
 00000000000i[PLUGIN] init_dev of 'pci2isa' plugin device by virtual method
 00000000000i[DEV   ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[PLUGIN] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS  ] Using local time for initial clock
-00000000000i[CMOS  ] Setting initial clock to: Tue Oct  2 09:54:56 2018 (time0=1538466896)
+00000000000i[CMOS  ] Setting initial clock to: Tue Oct  9 09:53:55 2018 (time0=1539071635)
 00000000000i[PLUGIN] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA   ] channel 4 used by cascade
 00000000000i[PLUGIN] init_dev of 'pic' plugin device by virtual method
@@ -53,7 +53,7 @@
 00000000000i[BXVGA ] VBE Bochs Display Extension Enabled
 00000000000i[XGUI  ] test_alloc_colors: 16 colors available out of 16 colors tried
 00000000000i[XGUI  ] font 8 wide x 16 high, display depth = 24
-00000000000i[MEM0  ] rom at 0xc0000/41472 ('/opt/bochs/share/bochs/VGABIOS-lgpl-latest')
+00000000000i[MEM0  ] rom at 0xc0000/41472 ('/opt/bochs_gdb/share/bochs/VGABIOS-lgpl-latest')
 00000000000i[PLUGIN] init_dev of 'floppy' plugin device by virtual method
 00000000000i[DMA   ] channel 2 used by Floppy Drive
 00000000000i[FLOPPY] fd0: './zeos.bin' ro=0, h=2,t=80,spt=18
@@ -80,7 +80,6 @@
 00000000000i[PAR   ] parallel port 1 at 0x0378 irq 7
 00000000000i[PLUGIN] init_dev of 'serial' plugin device by virtual method
 00000000000i[SER   ] com1 at 0x03f8 irq 4 (mode: null)
-00000000000i[PLUGIN] init_dev of 'iodebug' plugin device by virtual method
 00000000000i[PLUGIN] register state of 'pci' plugin device by virtual method
 00000000000i[PLUGIN] register state of 'pci2isa' plugin device by virtual method
 00000000000i[PLUGIN] register state of 'cmos' plugin device by virtual method
@@ -95,7 +94,6 @@
 00000000000i[PLUGIN] register state of 'extfpuirq' plugin device by virtual method
 00000000000i[PLUGIN] register state of 'parallel' plugin device by virtual method
 00000000000i[PLUGIN] register state of 'serial' plugin device by virtual method
-00000000000i[PLUGIN] register state of 'iodebug' plugin device by virtual method
 00000000000i[PLUGIN] register state of 'acpi' plugin device by virtual method
 00000000000i[PLUGIN] register state of 'ioapic' plugin device by virtual method
 00000000000i[PLUGIN] register state of 'keyboard' plugin device by virtual method
@@ -129,10 +127,750 @@
 00000000000i[PLUGIN] reset of 'extfpuirq' plugin device by virtual method
 00000000000i[PLUGIN] reset of 'parallel' plugin device by virtual method
 00000000000i[PLUGIN] reset of 'serial' plugin device by virtual method
-00000000000i[PLUGIN] reset of 'iodebug' plugin device by virtual method
 00000000000i[XGUI  ] Mouse capture off
-00000000000i[      ] set SIGINT handler to bx_debug_ctrlc_handler
 00000000000i[XGUI  ] Mouse capture off
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[GDBST ] addr 000000000000fff0 len 1
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[GDBST ] addr 000000000000fff0 len 1
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[GDBST ] addr 000000000000ffc0 len 40
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[GDBST ] addr 000000000000fff0 len 8
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[GDBST ] addr 000000000000fff0 len 7
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[GDBST ] addr 000000000000fff0 len 1
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[GDBST ] addr 000000000000fff0 len 1
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[GDBST ] addr 000000000000fff0 len 8
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[GDBST ] addr 000000000000fff0 len 7
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[XGUI  ] Mouse capture off
+00000000000i[GDBST ] stepping
+00000000001i[GDBST ] stopped with ac2
+00000000001i[XGUI  ] Mouse capture off
+00000000001i[XGUI  ] Mouse capture off
+00000000001i[GDBST ] addr 000000000000e05b len 1
+00000000001i[XGUI  ] Mouse capture off
+00000000001i[GDBST ] addr 000000000000e05b len 1
+00000000001i[XGUI  ] Mouse capture off
+00000000001i[GDBST ] addr 000000000000e040 len 40
+00000000001i[XGUI  ] Mouse capture off
+00000000001i[GDBST ] addr 000000000000e05b len 8
+00000000001i[XGUI  ] Mouse capture off
+00000000001i[GDBST ] addr 000000000000e05b len 7
+00000000001i[XGUI  ] Mouse capture off
+00000000001i[XGUI  ] Mouse capture off
+00000000001i[GDBST ] stepping
+00000000002i[GDBST ] stopped with ac2
+00000000002i[XGUI  ] Mouse capture off
+00000000002i[XGUI  ] Mouse capture off
+00000000002i[GDBST ] addr 000000000000e05d len 1
+00000000002i[XGUI  ] Mouse capture off
+00000000002i[GDBST ] addr 000000000000e05d len 1
+00000000002i[XGUI  ] Mouse capture off
+00000000002i[GDBST ] addr 000000000000e040 len 40
+00000000002i[XGUI  ] Mouse capture off
+00000000002i[GDBST ] addr 000000000000e05d len 8
+00000000002i[XGUI  ] Mouse capture off
+00000000002i[GDBST ] addr 000000000000e05d len 7
+00000000002i[XGUI  ] Mouse capture off
+00000000002i[XGUI  ] Mouse capture off
+00000000002i[GDBST ] stepping
+00000000003i[GDBST ] stopped with ac2
+00000000003i[XGUI  ] Mouse capture off
+00000000003i[XGUI  ] Mouse capture off
+00000000003i[GDBST ] addr 000000000000e05f len 1
+00000000003i[XGUI  ] Mouse capture off
+00000000003i[GDBST ] addr 000000000000e05f len 1
+00000000003i[XGUI  ] Mouse capture off
+00000000003i[GDBST ] addr 000000000000e040 len 40
+00000000003i[XGUI  ] Mouse capture off
+00000000003i[GDBST ] addr 000000000000e05f len 8
+00000000003i[XGUI  ] Mouse capture off
+00000000003i[GDBST ] addr 000000000000e05f len 7
+00000000003i[XGUI  ] Mouse capture off
+00000000003i[XGUI  ] Mouse capture off
+00000000003i[GDBST ] stepping
+00000000004i[GDBST ] stopped with ac2
+00000000004i[XGUI  ] Mouse capture off
+00000000004i[XGUI  ] Mouse capture off
+00000000004i[GDBST ] addr 000000000000e061 len 1
+00000000004i[XGUI  ] Mouse capture off
+00000000004i[GDBST ] addr 000000000000e061 len 1
+00000000004i[XGUI  ] Mouse capture off
+00000000004i[GDBST ] addr 000000000000e040 len 40
+00000000004i[XGUI  ] Mouse capture off
+00000000004i[GDBST ] addr 000000000000e061 len 8
+00000000004i[XGUI  ] Mouse capture off
+00000000004i[GDBST ] addr 000000000000e061 len 7
+00000000004i[XGUI  ] Mouse capture off
+00000000004i[XGUI  ] Mouse capture off
+00000000004i[GDBST ] stepping
+00000000005i[GDBST ] stopped with ac2
+00000000005i[XGUI  ] Mouse capture off
+00000000005i[XGUI  ] Mouse capture off
+00000000005i[GDBST ] addr 000000000000e063 len 1
+00000000005i[XGUI  ] Mouse capture off
+00000000005i[GDBST ] addr 000000000000e063 len 1
+00000000005i[XGUI  ] Mouse capture off
+00000000005i[GDBST ] addr 000000000000e040 len 40
+00000000005i[XGUI  ] Mouse capture off
+00000000005i[GDBST ] addr 000000000000e063 len 8
+00000000005i[XGUI  ] Mouse capture off
+00000000005i[GDBST ] addr 000000000000e063 len 7
+00000000005i[XGUI  ] Mouse capture off
+00000000005i[XGUI  ] Mouse capture off
+00000000005i[GDBST ] stepping
+00000000006i[GDBST ] stopped with ac2
+00000000006i[XGUI  ] Mouse capture off
+00000000006i[XGUI  ] Mouse capture off
+00000000006i[GDBST ] addr 000000000000e065 len 1
+00000000006i[XGUI  ] Mouse capture off
+00000000006i[GDBST ] addr 000000000000e065 len 1
+00000000006i[XGUI  ] Mouse capture off
+00000000006i[GDBST ] addr 000000000000e040 len 40
+00000000006i[XGUI  ] Mouse capture off
+00000000006i[GDBST ] addr 000000000000e065 len 8
+00000000006i[XGUI  ] Mouse capture off
+00000000006i[GDBST ] addr 000000000000e065 len 7
+00000000006i[XGUI  ] Mouse capture off
+00000000006i[XGUI  ] Mouse capture off
+00000000006i[GDBST ] stepping
+00000000007i[GDBST ] stopped with ac2
+00000000007i[XGUI  ] Mouse capture off
+00000000007i[XGUI  ] Mouse capture off
+00000000007i[GDBST ] addr 000000000000e067 len 1
+00000000007i[XGUI  ] Mouse capture off
+00000000007i[GDBST ] addr 000000000000e067 len 1
+00000000007i[XGUI  ] Mouse capture off
+00000000007i[GDBST ] addr 000000000000e040 len 40
+00000000007i[XGUI  ] Mouse capture off
+00000000007i[GDBST ] addr 000000000000e067 len 8
+00000000007i[XGUI  ] Mouse capture off
+00000000007i[GDBST ] addr 000000000000e067 len 7
+00000000007i[XGUI  ] Mouse capture off
+00000000007i[XGUI  ] Mouse capture off
+00000000007i[GDBST ] stepping
+00000000008i[GDBST ] stopped with ac2
+00000000008i[XGUI  ] Mouse capture off
+00000000008i[XGUI  ] Mouse capture off
+00000000008i[GDBST ] addr 000000000000e069 len 1
+00000000008i[XGUI  ] Mouse capture off
+00000000008i[GDBST ] addr 000000000000e069 len 1
+00000000008i[XGUI  ] Mouse capture off
+00000000008i[GDBST ] addr 000000000000e040 len 40
+00000000008i[XGUI  ] Mouse capture off
+00000000008i[GDBST ] addr 000000000000e069 len 8
+00000000008i[XGUI  ] Mouse capture off
+00000000008i[GDBST ] addr 000000000000e069 len 7
+00000000008i[XGUI  ] Mouse capture off
+00000000008i[XGUI  ] Mouse capture off
+00000000008i[GDBST ] stepping
+00000000009i[GDBST ] stopped with ac2
+00000000009i[XGUI  ] Mouse capture off
+00000000009i[XGUI  ] Mouse capture off
+00000000009i[GDBST ] addr 000000000000e06b len 1
+00000000009i[XGUI  ] Mouse capture off
+00000000009i[GDBST ] addr 000000000000e06b len 1
+00000000009i[XGUI  ] Mouse capture off
+00000000009i[GDBST ] addr 000000000000e040 len 40
+00000000009i[XGUI  ] Mouse capture off
+00000000009i[GDBST ] addr 000000000000e06b len 8
+00000000009i[XGUI  ] Mouse capture off
+00000000009i[GDBST ] addr 000000000000e06b len 7
+00000000009i[XGUI  ] Mouse capture off
+00000000009i[XGUI  ] Mouse capture off
+00000000009i[GDBST ] stepping
+00000000010i[GDBST ] stopped with ac2
+00000000010i[XGUI  ] Mouse capture off
+00000000010i[XGUI  ] Mouse capture off
+00000000010i[GDBST ] addr 000000000000e06d len 1
+00000000010i[XGUI  ] Mouse capture off
+00000000010i[GDBST ] addr 000000000000e06d len 1
+00000000010i[XGUI  ] Mouse capture off
+00000000010i[GDBST ] addr 000000000000e040 len 40
+00000000010i[XGUI  ] Mouse capture off
+00000000010i[GDBST ] addr 000000000000e06d len 8
+00000000010i[XGUI  ] Mouse capture off
+00000000010i[GDBST ] addr 000000000000e06d len 7
+00000000010i[XGUI  ] Mouse capture off
+00000000010i[XGUI  ] Mouse capture off
+00000000010i[GDBST ] stepping
+00000000011i[GDBST ] stopped with ac2
+00000000011i[XGUI  ] Mouse capture off
+00000000011i[XGUI  ] Mouse capture off
+00000000011i[GDBST ] addr 000000000000e06f len 1
+00000000011i[XGUI  ] Mouse capture off
+00000000011i[GDBST ] addr 000000000000e06f len 1
+00000000011i[XGUI  ] Mouse capture off
+00000000011i[GDBST ] addr 000000000000e040 len 40
+00000000011i[XGUI  ] Mouse capture off
+00000000011i[GDBST ] addr 000000000000e06f len 8
+00000000011i[XGUI  ] Mouse capture off
+00000000011i[GDBST ] addr 000000000000e06f len 7
+00000000011i[XGUI  ] Mouse capture off
+00000000011i[XGUI  ] Mouse capture off
+00000000011i[GDBST ] stepping
+00000000012i[GDBST ] stopped with ac2
+00000000012i[XGUI  ] Mouse capture off
+00000000012i[XGUI  ] Mouse capture off
+00000000012i[GDBST ] addr 000000000000e071 len 1
+00000000012i[XGUI  ] Mouse capture off
+00000000012i[GDBST ] addr 000000000000e071 len 1
+00000000012i[XGUI  ] Mouse capture off
+00000000012i[GDBST ] addr 000000000000e040 len 40
+00000000012i[XGUI  ] Mouse capture off
+00000000012i[GDBST ] addr 000000000000e071 len 8
+00000000012i[XGUI  ] Mouse capture off
+00000000012i[GDBST ] addr 000000000000e071 len 7
+00000000012i[XGUI  ] Mouse capture off
+00000000012i[XGUI  ] Mouse capture off
+00000000012i[GDBST ] stepping
+00000000013i[GDBST ] stopped with ac2
+00000000013i[XGUI  ] Mouse capture off
+00000000013i[XGUI  ] Mouse capture off
+00000000013i[GDBST ] addr 000000000000e073 len 1
+00000000013i[XGUI  ] Mouse capture off
+00000000013i[GDBST ] addr 000000000000e073 len 1
+00000000013i[XGUI  ] Mouse capture off
+00000000013i[GDBST ] addr 000000000000e040 len 40
+00000000013i[XGUI  ] Mouse capture off
+00000000013i[GDBST ] addr 000000000000e073 len 8
+00000000013i[XGUI  ] Mouse capture off
+00000000013i[GDBST ] addr 000000000000e073 len 7
+00000000013i[XGUI  ] Mouse capture off
+00000000013i[XGUI  ] Mouse capture off
+00000000013i[GDBST ] stepping
+00000000014i[GDBST ] stopped with ac2
+00000000014i[XGUI  ] Mouse capture off
+00000000014i[XGUI  ] Mouse capture off
+00000000014i[GDBST ] addr 000000000000e075 len 1
+00000000014i[XGUI  ] Mouse capture off
+00000000014i[GDBST ] addr 000000000000e075 len 1
+00000000014i[XGUI  ] Mouse capture off
+00000000014i[GDBST ] addr 000000000000e040 len 40
+00000000014i[XGUI  ] Mouse capture off
+00000000014i[GDBST ] addr 000000000000e075 len 8
+00000000014i[XGUI  ] Mouse capture off
+00000000014i[GDBST ] addr 000000000000e075 len 7
+00000000014i[XGUI  ] Mouse capture off
+00000000014i[XGUI  ] Mouse capture off
+00000000014i[GDBST ] stepping
+00000000015i[GDBST ] stopped with ac2
+00000000015i[XGUI  ] Mouse capture off
+00000000015i[XGUI  ] Mouse capture off
+00000000015i[GDBST ] addr 000000000000e077 len 1
+00000000015i[XGUI  ] Mouse capture off
+00000000015i[GDBST ] addr 000000000000e077 len 1
+00000000015i[XGUI  ] Mouse capture off
+00000000015i[GDBST ] addr 000000000000e040 len 40
+00000000015i[XGUI  ] Mouse capture off
+00000000015i[GDBST ] addr 000000000000e077 len 8
+00000000015i[XGUI  ] Mouse capture off
+00000000015i[GDBST ] addr 000000000000e077 len 7
+00000000015i[XGUI  ] Mouse capture off
+00000000015i[XGUI  ] Mouse capture off
+00000000015i[GDBST ] stepping
+00000000016i[GDBST ] stopped with ac2
+00000000016i[XGUI  ] Mouse capture off
+00000000016i[XGUI  ] Mouse capture off
+00000000016i[GDBST ] addr 000000000000e079 len 1
+00000000016i[XGUI  ] Mouse capture off
+00000000016i[GDBST ] addr 000000000000e079 len 1
+00000000016i[XGUI  ] Mouse capture off
+00000000016i[GDBST ] addr 000000000000e040 len 40
+00000000016i[XGUI  ] Mouse capture off
+00000000016i[GDBST ] addr 000000000000e079 len 8
+00000000016i[XGUI  ] Mouse capture off
+00000000016i[GDBST ] addr 000000000000e079 len 7
+00000000016i[XGUI  ] Mouse capture off
+00000000016i[XGUI  ] Mouse capture off
+00000000016i[GDBST ] stepping
+00000000017i[GDBST ] stopped with ac2
+00000000017i[XGUI  ] Mouse capture off
+00000000017i[XGUI  ] Mouse capture off
+00000000017i[GDBST ] addr 000000000000e07b len 1
+00000000017i[XGUI  ] Mouse capture off
+00000000017i[GDBST ] addr 000000000000e07b len 1
+00000000017i[XGUI  ] Mouse capture off
+00000000017i[GDBST ] addr 000000000000e040 len 40
+00000000017i[XGUI  ] Mouse capture off
+00000000017i[GDBST ] addr 000000000000e07b len 8
+00000000017i[XGUI  ] Mouse capture off
+00000000017i[GDBST ] addr 000000000000e07b len 7
+00000000017i[XGUI  ] Mouse capture off
+00000000017i[XGUI  ] Mouse capture off
+00000000017i[GDBST ] stepping
+00000000018i[GDBST ] stopped with ac2
+00000000018i[XGUI  ] Mouse capture off
+00000000018i[XGUI  ] Mouse capture off
+00000000018i[GDBST ] addr 000000000000e07d len 1
+00000000018i[XGUI  ] Mouse capture off
+00000000018i[GDBST ] addr 000000000000e07d len 1
+00000000018i[XGUI  ] Mouse capture off
+00000000018i[GDBST ] addr 000000000000e040 len 40
+00000000018i[XGUI  ] Mouse capture off
+00000000018i[GDBST ] addr 000000000000e07d len 8
+00000000018i[XGUI  ] Mouse capture off
+00000000018i[GDBST ] addr 000000000000e07d len 7
+00000000018i[XGUI  ] Mouse capture off
+00000000018i[XGUI  ] Mouse capture off
+00000000018i[GDBST ] stepping
+00000000019i[GDBST ] stopped with ac2
+00000000019i[XGUI  ] Mouse capture off
+00000000019i[XGUI  ] Mouse capture off
+00000000019i[GDBST ] addr 000000000000e0a3 len 1
+00000000019i[XGUI  ] Mouse capture off
+00000000019i[GDBST ] addr 000000000000e0a3 len 1
+00000000019i[XGUI  ] Mouse capture off
+00000000019i[GDBST ] addr 000000000000e080 len 40
+00000000019i[XGUI  ] Mouse capture off
+00000000019i[GDBST ] addr 000000000000e0a3 len 8
+00000000019i[XGUI  ] Mouse capture off
+00000000019i[GDBST ] addr 000000000000e0a3 len 7
+00000000019i[XGUI  ] Mouse capture off
+00000000019i[XGUI  ] Mouse capture off
+00000000019i[GDBST ] stepping
+00000000020i[GDBST ] stopped with ac2
+00000000020i[XGUI  ] Mouse capture off
+00000000020i[XGUI  ] Mouse capture off
+00000000020i[GDBST ] addr 000000000000e0a4 len 1
+00000000020i[XGUI  ] Mouse capture off
+00000000020i[GDBST ] addr 000000000000e0a4 len 1
+00000000020i[XGUI  ] Mouse capture off
+00000000020i[GDBST ] addr 000000000000e080 len 40
+00000000020i[XGUI  ] Mouse capture off
+00000000020i[GDBST ] addr 000000000000e0a4 len 8
+00000000020i[XGUI  ] Mouse capture off
+00000000020i[GDBST ] addr 000000000000e0a4 len 7
+00000000020i[XGUI  ] Mouse capture off
+00000000020i[XGUI  ] Mouse capture off
+00000000020i[GDBST ] stepping
+00000000021i[GDBST ] stopped with ac2
+00000000021i[XGUI  ] Mouse capture off
+00000000021i[XGUI  ] Mouse capture off
+00000000021i[GDBST ] addr 000000000000e0a7 len 1
+00000000021i[XGUI  ] Mouse capture off
+00000000021i[GDBST ] addr 000000000000e0a7 len 1
+00000000021i[XGUI  ] Mouse capture off
+00000000021i[GDBST ] addr 000000000000e080 len 40
+00000000021i[XGUI  ] Mouse capture off
+00000000021i[GDBST ] addr 000000000000e0a7 len 8
+00000000021i[XGUI  ] Mouse capture off
+00000000021i[GDBST ] addr 000000000000e0a7 len 7
+00000000021i[XGUI  ] Mouse capture off
+00000000021i[XGUI  ] Mouse capture off
+00000000021i[GDBST ] stepping
+00000000022i[GDBST ] stopped with ac2
+00000000022i[XGUI  ] Mouse capture off
+00000000022i[XGUI  ] Mouse capture off
+00000000022i[GDBST ] addr 000000000000e0a9 len 1
+00000000022i[XGUI  ] Mouse capture off
+00000000022i[GDBST ] addr 000000000000e0a9 len 1
+00000000022i[XGUI  ] Mouse capture off
+00000000022i[GDBST ] addr 000000000000e080 len 40
+00000000022i[XGUI  ] Mouse capture off
+00000000022i[GDBST ] addr 000000000000e0a9 len 8
+00000000022i[XGUI  ] Mouse capture off
+00000000022i[GDBST ] addr 000000000000e0a9 len 7
+00000000022i[XGUI  ] Mouse capture off
+00000000022i[XGUI  ] Mouse capture off
+00000000022i[GDBST ] stepping
+00000000023i[GDBST ] stopped with ac2
+00000000023i[XGUI  ] Mouse capture off
+00000000023i[XGUI  ] Mouse capture off
+00000000023i[GDBST ] addr 000000000000e0ab len 1
+00000000023i[XGUI  ] Mouse capture off
+00000000023i[GDBST ] addr 000000000000e0ab len 1
+00000000023i[XGUI  ] Mouse capture off
+00000000023i[GDBST ] addr 000000000000e080 len 40
+00000000023i[XGUI  ] Mouse capture off
+00000000023i[GDBST ] addr 000000000000e0ab len 8
+00000000023i[XGUI  ] Mouse capture off
+00000000023i[GDBST ] addr 000000000000e0ab len 7
+00000000023i[XGUI  ] Mouse capture off
+00000000023i[XGUI  ] Mouse capture off
+00000000023i[GDBST ] stepping
+00000000024i[GDBST ] stopped with ac2
+00000000024i[XGUI  ] Mouse capture off
+00000000024i[XGUI  ] Mouse capture off
+00000000024i[GDBST ] addr 000000000000e0ad len 1
+00000000024i[XGUI  ] Mouse capture off
+00000000024i[GDBST ] addr 000000000000e0ad len 1
+00000000024i[XGUI  ] Mouse capture off
+00000000024i[GDBST ] addr 000000000000e080 len 40
+00000000024i[XGUI  ] Mouse capture off
+00000000024i[GDBST ] addr 000000000000e0ad len 8
+00000000024i[XGUI  ] Mouse capture off
+00000000024i[GDBST ] addr 000000000000e0ad len 7
+00000000024i[XGUI  ] Mouse capture off
+00000000024i[XGUI  ] Mouse capture off
+00000000024i[GDBST ] stepping
+00000000025i[GDBST ] stopped with ac2
+00000000025i[XGUI  ] Mouse capture off
+00000000025i[XGUI  ] Mouse capture off
+00000000025i[GDBST ] addr 000000000000e0af len 1
+00000000025i[XGUI  ] Mouse capture off
+00000000025i[GDBST ] addr 000000000000e0af len 1
+00000000025i[XGUI  ] Mouse capture off
+00000000025i[GDBST ] addr 000000000000e080 len 40
+00000000025i[XGUI  ] Mouse capture off
+00000000025i[GDBST ] addr 000000000000e0af len 8
+00000000025i[XGUI  ] Mouse capture off
+00000000025i[GDBST ] addr 000000000000e0af len 7
+00000000025i[XGUI  ] Mouse capture off
+00000000025i[XGUI  ] Mouse capture off
+00000000025i[GDBST ] stepping
+00000000026i[GDBST ] stopped with ac2
+00000000026i[XGUI  ] Mouse capture off
+00000000026i[XGUI  ] Mouse capture off
+00000000026i[GDBST ] addr 000000000000e0b3 len 1
+00000000026i[XGUI  ] Mouse capture off
+00000000026i[GDBST ] addr 000000000000e0b3 len 1
+00000000026i[XGUI  ] Mouse capture off
+00000000026i[GDBST ] addr 000000000000e080 len 40
+00000000026i[XGUI  ] Mouse capture off
+00000000026i[GDBST ] addr 000000000000e0b3 len 8
+00000000026i[XGUI  ] Mouse capture off
+00000000026i[GDBST ] addr 000000000000e0b3 len 7
+00000000026i[XGUI  ] Mouse capture off
+00000000026i[XGUI  ] Mouse capture off
+00000000026i[GDBST ] stepping
+00000000027i[GDBST ] stopped with ac2
+00000000027i[XGUI  ] Mouse capture off
+00000000027i[XGUI  ] Mouse capture off
+00000000027i[GDBST ] addr 000000000000e0b6 len 1
+00000000027i[XGUI  ] Mouse capture off
+00000000027i[GDBST ] addr 000000000000e0b6 len 1
+00000000027i[XGUI  ] Mouse capture off
+00000000027i[GDBST ] addr 000000000000e080 len 40
+00000000027i[XGUI  ] Mouse capture off
+00000000027i[GDBST ] addr 000000000000e0b6 len 8
+00000000027i[XGUI  ] Mouse capture off
+00000000027i[GDBST ] addr 000000000000e0b6 len 7
+00000000027i[XGUI  ] Mouse capture off
+00000000027i[XGUI  ] Mouse capture off
+00000000027i[GDBST ] stepping
+00000000028i[GDBST ] stopped with ac2
+00000000028i[XGUI  ] Mouse capture off
+00000000028i[XGUI  ] Mouse capture off
+00000000028i[GDBST ] addr 000000000000e0bb len 1
+00000000028i[XGUI  ] Mouse capture off
+00000000028i[GDBST ] addr 000000000000e0bb len 1
+00000000028i[XGUI  ] Mouse capture off
+00000000028i[GDBST ] addr 000000000000e080 len 40
+00000000028i[XGUI  ] Mouse capture off
+00000000028i[GDBST ] addr 000000000000e0bb len 8
+00000000028i[XGUI  ] Mouse capture off
+00000000028i[GDBST ] addr 000000000000e0bb len 7
+00000000028i[XGUI  ] Mouse capture off
+00000000028i[XGUI  ] Mouse capture off
+00000000028i[GDBST ] stepping
+00000000029i[GDBST ] stopped with ac2
+00000000029i[XGUI  ] Mouse capture off
+00000000029i[XGUI  ] Mouse capture off
+00000000029i[GDBST ] addr 000000000000e0bd len 1
+00000000029i[XGUI  ] Mouse capture off
+00000000029i[GDBST ] addr 000000000000e0bd len 1
+00000000029i[XGUI  ] Mouse capture off
+00000000029i[GDBST ] addr 000000000000e080 len 40
+00000000029i[XGUI  ] Mouse capture off
+00000000029i[GDBST ] addr 000000000000e0bd len 8
+00000000029i[XGUI  ] Mouse capture off
+00000000029i[GDBST ] addr 000000000000e0bd len 7
+00000000029i[XGUI  ] Mouse capture off
+00000000029i[XGUI  ] Mouse capture off
+00000000029i[GDBST ] stepping
+00000000030i[GDBST ] stopped with ac2
+00000000030i[XGUI  ] Mouse capture off
+00000000030i[XGUI  ] Mouse capture off
+00000000030i[GDBST ] addr 000000000000e0c0 len 1
+00000000030i[XGUI  ] Mouse capture off
+00000000030i[GDBST ] addr 000000000000e0c0 len 1
+00000000030i[XGUI  ] Mouse capture off
+00000000030i[GDBST ] addr 000000000000e0c0 len 40
+00000000030i[XGUI  ] Mouse capture off
+00000000030i[GDBST ] addr 000000000000e0c0 len 8
+00000000030i[XGUI  ] Mouse capture off
+00000000030i[GDBST ] addr 000000000000e0c0 len 7
+00000000030i[XGUI  ] Mouse capture off
+00000000030i[XGUI  ] Mouse capture off
+00000000030i[GDBST ] stepping
+00000000031i[GDBST ] stopped with ac2
+00000000031i[XGUI  ] Mouse capture off
+00000000031i[XGUI  ] Mouse capture off
+00000000031i[GDBST ] addr 000000000000e0c3 len 1
+00000000031i[XGUI  ] Mouse capture off
+00000000031i[GDBST ] addr 000000000000e0c3 len 1
+00000000031i[XGUI  ] Mouse capture off
+00000000031i[GDBST ] addr 000000000000e0c0 len 40
+00000000031i[XGUI  ] Mouse capture off
+00000000031i[GDBST ] addr 000000000000e0c3 len 8
+00000000031i[XGUI  ] Mouse capture off
+00000000031i[GDBST ] addr 000000000000e0c3 len 7
+00000000031i[XGUI  ] Mouse capture off
+00000000031i[XGUI  ] Mouse capture off
+00000000031i[GDBST ] stepping
+00000000032i[GDBST ] stopped with ac2
+00000000032i[XGUI  ] Mouse capture off
+00000000032i[XGUI  ] Mouse capture off
+00000000032i[GDBST ] addr 000000000000e0c4 len 1
+00000000032i[XGUI  ] Mouse capture off
+00000000032i[GDBST ] addr 000000000000e0c4 len 1
+00000000032i[XGUI  ] Mouse capture off
+00000000032i[GDBST ] addr 000000000000e0c0 len 40
+00000000032i[XGUI  ] Mouse capture off
+00000000032i[GDBST ] addr 000000000000e0c4 len 8
+00000000032i[XGUI  ] Mouse capture off
+00000000032i[GDBST ] addr 000000000000e0c4 len 7
+00000000032i[XGUI  ] Mouse capture off
+00000000032i[XGUI  ] Mouse capture off
+00000000032i[GDBST ] stepping
+00000000160i[GDBST ] stopped with ac2
+00000000160i[XGUI  ] Mouse capture off
+00000000160i[XGUI  ] Mouse capture off
+00000000160i[GDBST ] addr 000000000000e0c6 len 1
+00000000160i[XGUI  ] Mouse capture off
+00000000160i[GDBST ] addr 000000000000e0c6 len 1
+00000000160i[XGUI  ] Mouse capture off
+00000000160i[GDBST ] addr 000000000000e0c0 len 40
+00000000160i[XGUI  ] Mouse capture off
+00000000160i[GDBST ] addr 000000000000e0c6 len 8
+00000000160i[XGUI  ] Mouse capture off
+00000000160i[GDBST ] addr 000000000000e0c6 len 7
+00000000160i[XGUI  ] Mouse capture off
+00000000160i[XGUI  ] Mouse capture off
+00000000160i[GDBST ] stepping
+00000000161i[GDBST ] stopped with ac2
+00000000161i[XGUI  ] Mouse capture off
+00000000161i[XGUI  ] Mouse capture off
+00000000161i[GDBST ] addr 0000000000001713 len 1
+00000000161i[XGUI  ] Mouse capture off
+00000000161i[GDBST ] addr 0000000000001713 len 1
+00000000161i[XGUI  ] Mouse capture off
+00000000161i[GDBST ] addr 0000000000001700 len 40
+00000000161i[XGUI  ] Mouse capture off
+00000000161i[GDBST ] addr 0000000000001713 len 8
+00000000161i[XGUI  ] Mouse capture off
+00000000161i[GDBST ] addr 0000000000001713 len 7
+00000000161i[XGUI  ] Mouse capture off
+00000000161i[XGUI  ] Mouse capture off
+00000000161i[GDBST ] stepping
+00000000162i[GDBST ] stopped with ac2
+00000000162i[XGUI  ] Mouse capture off
+00000000162i[XGUI  ] Mouse capture off
+00000000162i[GDBST ] addr 0000000000001714 len 1
+00000000162i[XGUI  ] Mouse capture off
+00000000162i[GDBST ] addr 0000000000001714 len 1
+00000000162i[XGUI  ] Mouse capture off
+00000000162i[GDBST ] addr 0000000000001700 len 40
+00000000162i[XGUI  ] Mouse capture off
+00000000162i[GDBST ] addr 0000000000001714 len 8
+00000000162i[XGUI  ] Mouse capture off
+00000000162i[GDBST ] addr 0000000000001714 len 7
+00000000162i[XGUI  ] Mouse capture off
+00000000162i[XGUI  ] Mouse capture off
+00000000162i[GDBST ] stepping
+00000000163i[GDBST ] stopped with ac2
+00000000163i[XGUI  ] Mouse capture off
+00000000163i[XGUI  ] Mouse capture off
+00000000163i[GDBST ] addr 0000000000001716 len 1
+00000000163i[XGUI  ] Mouse capture off
+00000000163i[GDBST ] addr 0000000000001716 len 1
+00000000163i[XGUI  ] Mouse capture off
+00000000163i[GDBST ] addr 0000000000001700 len 40
+00000000163i[XGUI  ] Mouse capture off
+00000000163i[GDBST ] addr 0000000000001716 len 8
+00000000163i[XGUI  ] Mouse capture off
+00000000163i[GDBST ] addr 0000000000001716 len 7
+00000000163i[XGUI  ] Mouse capture off
+00000000163i[GDBST ] addr 000000000000ffc0 len 40
+00000000163i[XGUI  ] Mouse capture off
+00000000163i[GDBST ] addr 0000000000010000 len 40
+00000000163i[XGUI  ] Mouse capture off
+00000000163i[GDBST ] addr 0000000000000000 len 8
+00000000163i[XGUI  ] Mouse capture off
+00000000163i[GDBST ] addr 0000000000000000 len 7
+00000000163i[XGUI  ] Mouse capture off
+00000000163i[GDBST ] addr 0000000000000000 len 40
+00000000163i[XGUI  ] Mouse capture off
+00000000163i[XGUI  ] Mouse capture off
+00000000163i[GDBST ] stepping
+00000000164i[GDBST ] stopped with ac2
+00000000164i[XGUI  ] Mouse capture off
+00000000164i[XGUI  ] Mouse capture off
+00000000164i[GDBST ] addr 0000000000001719 len 1
+00000000164i[XGUI  ] Mouse capture off
+00000000164i[GDBST ] addr 0000000000001719 len 1
+00000000164i[XGUI  ] Mouse capture off
+00000000164i[GDBST ] addr 0000000000001700 len 40
+00000000164i[XGUI  ] Mouse capture off
+00000000164i[GDBST ] addr 0000000000001719 len 8
+00000000164i[XGUI  ] Mouse capture off
+00000000164i[GDBST ] addr 0000000000001719 len 7
+00000000164i[XGUI  ] Mouse capture off
+00000000164i[XGUI  ] Mouse capture off
+00000000164i[GDBST ] stepping
+00000000165i[GDBST ] stopped with ac2
+00000000165i[XGUI  ] Mouse capture off
+00000000165i[XGUI  ] Mouse capture off
+00000000165i[GDBST ] addr 000000000000171a len 1
+00000000165i[XGUI  ] Mouse capture off
+00000000165i[GDBST ] addr 000000000000171a len 1
+00000000165i[XGUI  ] Mouse capture off
+00000000165i[GDBST ] addr 0000000000001700 len 40
+00000000165i[XGUI  ] Mouse capture off
+00000000165i[GDBST ] addr 000000000000171a len 8
+00000000165i[XGUI  ] Mouse capture off
+00000000165i[GDBST ] addr 000000000000171a len 7
+00000000165i[XGUI  ] Mouse capture off
+00000000165i[XGUI  ] Mouse capture off
+00000000165i[GDBST ] stepping
+00000000166i[GDBST ] stopped with ac2
+00000000166i[XGUI  ] Mouse capture off
+00000000166i[XGUI  ] Mouse capture off
+00000000166i[GDBST ] addr 000000000000171d len 1
+00000000166i[XGUI  ] Mouse capture off
+00000000166i[GDBST ] addr 000000000000171d len 1
+00000000166i[XGUI  ] Mouse capture off
+00000000166i[GDBST ] addr 0000000000001700 len 40
+00000000166i[XGUI  ] Mouse capture off
+00000000166i[GDBST ] addr 000000000000171d len 8
+00000000166i[XGUI  ] Mouse capture off
+00000000166i[GDBST ] addr 000000000000171d len 7
+00000000166i[XGUI  ] Mouse capture off
+00000000166i[XGUI  ] Mouse capture off
+00000000166i[GDBST ] stepping
+00000000167i[GDBST ] stopped with ac2
+00000000167i[XGUI  ] Mouse capture off
+00000000167i[XGUI  ] Mouse capture off
+00000000167i[GDBST ] addr 000000000000171e len 1
+00000000167i[XGUI  ] Mouse capture off
+00000000167i[GDBST ] addr 000000000000171e len 1
+00000000167i[XGUI  ] Mouse capture off
+00000000167i[GDBST ] addr 0000000000001700 len 40
+00000000167i[XGUI  ] Mouse capture off
+00000000167i[GDBST ] addr 000000000000171e len 8
+00000000167i[XGUI  ] Mouse capture off
+00000000167i[GDBST ] addr 000000000000171e len 7
+00000000167i[XGUI  ] Mouse capture off
+00000000167i[XGUI  ] Mouse capture off
+00000000167i[GDBST ] stepping
+00000000168i[GDBST ] stopped with ac2
+00000000168i[XGUI  ] Mouse capture off
+00000000168i[XGUI  ] Mouse capture off
+00000000168i[GDBST ] addr 0000000000001721 len 1
+00000000168i[XGUI  ] Mouse capture off
+00000000168i[GDBST ] addr 0000000000001721 len 1
+00000000168i[XGUI  ] Mouse capture off
+00000000168i[GDBST ] addr 0000000000001700 len 40
+00000000168i[XGUI  ] Mouse capture off
+00000000168i[GDBST ] addr 0000000000001721 len 8
+00000000168i[XGUI  ] Mouse capture off
+00000000168i[GDBST ] addr 0000000000001721 len 7
+00000000168i[XGUI  ] Mouse capture off
+00000000168i[XGUI  ] Mouse capture off
+00000000168i[GDBST ] stepping
+00000000169i[GDBST ] stopped with ac2
+00000000169i[XGUI  ] Mouse capture off
+00000000169i[XGUI  ] Mouse capture off
+00000000169i[GDBST ] addr 0000000000001722 len 1
+00000000169i[XGUI  ] Mouse capture off
+00000000169i[GDBST ] addr 0000000000001722 len 1
+00000000169i[XGUI  ] Mouse capture off
+00000000169i[GDBST ] addr 0000000000001700 len 40
+00000000169i[XGUI  ] Mouse capture off
+00000000169i[GDBST ] addr 0000000000001722 len 8
+00000000169i[XGUI  ] Mouse capture off
+00000000169i[GDBST ] addr 0000000000001722 len 7
+00000000169i[XGUI  ] Mouse capture off
+00000000169i[XGUI  ] Mouse capture off
+00000000169i[GDBST ] stepping
+00000000170i[GDBST ] stopped with ac2
+00000000170i[XGUI  ] Mouse capture off
+00000000170i[XGUI  ] Mouse capture off
+00000000170i[GDBST ] addr 000000000000092a len 1
+00000000170i[XGUI  ] Mouse capture off
+00000000170i[GDBST ] addr 000000000000092a len 1
+00000000170i[XGUI  ] Mouse capture off
+00000000170i[GDBST ] addr 0000000000000900 len 40
+00000000170i[XGUI  ] Mouse capture off
+00000000170i[GDBST ] addr 000000000000092a len 8
+00000000170i[XGUI  ] Mouse capture off
+00000000170i[GDBST ] addr 000000000000092a len 7
+00000000170i[XGUI  ] Mouse capture off
+00000000170i[XGUI  ] Mouse capture off
+00000000170i[GDBST ] stepping
+00000000171i[GDBST ] stopped with ac2
+00000000171i[XGUI  ] Mouse capture off
+00000000171i[XGUI  ] Mouse capture off
+00000000171i[GDBST ] addr 000000000000092b len 1
+00000000171i[XGUI  ] Mouse capture off
+00000000171i[GDBST ] addr 000000000000092b len 1
+00000000171i[XGUI  ] Mouse capture off
+00000000171i[GDBST ] addr 0000000000000900 len 40
+00000000171i[XGUI  ] Mouse capture off
+00000000171i[GDBST ] addr 000000000000092b len 8
+00000000171i[XGUI  ] Mouse capture off
+00000000171i[GDBST ] addr 000000000000092b len 7
+00000000171i[XGUI  ] Mouse capture off
+00000000171i[XGUI  ] Mouse capture off
+00000000171i[GDBST ] stepping
+00000000172i[GDBST ] stopped with ac2
+00000000172i[XGUI  ] Mouse capture off
+00000000172i[XGUI  ] Mouse capture off
+00000000172i[GDBST ] addr 000000000000092d len 1
+00000000172i[XGUI  ] Mouse capture off
+00000000172i[GDBST ] addr 000000000000092d len 1
+00000000172i[XGUI  ] Mouse capture off
+00000000172i[GDBST ] addr 0000000000000900 len 40
+00000000172i[XGUI  ] Mouse capture off
+00000000172i[GDBST ] addr 000000000000092d len 8
+00000000172i[XGUI  ] Mouse capture off
+00000000172i[GDBST ] addr 000000000000092d len 7
+00000000172i[XGUI  ] Mouse capture off
+00000000172i[GDBST ] addr 000000000000ffc0 len 40
+00000000172i[XGUI  ] Mouse capture off
+00000000172i[GDBST ] addr 00000000d82a0004 len 8
+00000000172i[XGUI  ] Mouse capture off
+00000000172i[GDBST ] addr 00000000d82a0004 len 7
+00000000172i[XGUI  ] Mouse capture off
+00000000172i[GDBST ] addr 00000000d82a0000 len 40
+00000000172i[XGUI  ] Mouse capture off
+00000000172i[XGUI  ] Mouse capture off
+00000000172i[GDBST ] stepping
+00000000173i[GDBST ] stopped with ac2
+00000000173i[XGUI  ] Mouse capture off
+00000000173i[XGUI  ] Mouse capture off
+00000000173i[GDBST ] addr 0000000000000930 len 1
+00000000173i[XGUI  ] Mouse capture off
+00000000173i[GDBST ] addr 0000000000000930 len 1
+00000000173i[XGUI  ] Mouse capture off
+00000000173i[GDBST ] addr 0000000000000900 len 40
+00000000173i[XGUI  ] Mouse capture off
+00000000173i[GDBST ] addr 0000000000000930 len 8
+00000000173i[XGUI  ] Mouse capture off
+00000000173i[GDBST ] addr 0000000000000930 len 7
+00000000173i[XGUI  ] Mouse capture off
+00000000173i[XGUI  ] Mouse capture off
 00000004661i[BIOS  ] $Revision: 12412 $ $Date: 2014-07-10 09:28:59 +0200 (Do, 10. Jul 2014) $
 00000318049i[KBD   ] reset-disable command received
 00000320818i[BIOS  ] Starting rombios32
@@ -172,9 +910,9 @@
 00001529176i[BXVGA ] VBE known Display Interface b0c0
 00001529208i[BXVGA ] VBE known Display Interface b0c5
 00001532133i[VBIOS ] VBE Bios $Id: vbe.c,v 1.65 2014/07/08 18:02:25 vruppert Exp $
-00003743192i[XGUI  ] charmap update. Font Height is 16
+00004462452i[XGUI  ] charmap update. Font Height is 16
 00014040191i[BIOS  ] Booting from 0000:7c00
-00029018181i[FLOPPY] partial read() on floppy image returns 292/512
+00029018181i[FLOPPY] partial read() on floppy image returns 296/512
 00029062625i[FLOPPY] read() on floppy image returns 0
 00029107069i[FLOPPY] read() on floppy image returns 0
 00029151513i[FLOPPY] read() on floppy image returns 0
@@ -222,27 +960,34 @@
 00031023412i[FLOPPY] read() on floppy image returns 0
 00031067856i[FLOPPY] read() on floppy image returns 0
 00031112300i[FLOPPY] read() on floppy image returns 0
-00031158556e[CPU0  ] WRMSR: Unknown register 0x11
-01242203026i[      ] Ctrl-C detected in signal handler.
-01242203026i[XGUI  ] Mouse capture off
-01242203026i[      ] dbg: Quit
-01242203026i[CPU0  ] CPU is in protected mode (active)
-01242203026i[CPU0  ] CS.mode = 32 bit
-01242203026i[CPU0  ] SS.mode = 32 bit
-01242203026i[CPU0  ] EFER   = 0x00000000
-01242203026i[CPU0  ] | EAX=00000020  EBX=00108118  ECX=0011bff4  EDX=00007e2a
-01242203026i[CPU0  ] | ESP=0011bfe0  EBP=0011bfe8  ESI=000e0200  EDI=00003ff4
-01242203026i[CPU0  ] | IOPL=0 id vip vif ac vm rf nt of df IF tf sf zf af pf cf
-01242203026i[CPU0  ] | SEG sltr(index|ti|rpl)     base    limit G D
-01242203026i[CPU0  ] |  CS:0023( 0004| 0|  3) 00000000 ffffffff 1 1
-01242203026i[CPU0  ] |  DS:002b( 0005| 0|  3) 00000000 ffffffff 1 1
-01242203026i[CPU0  ] |  SS:002b( 0005| 0|  3) 00000000 ffffffff 1 1
-01242203026i[CPU0  ] |  ES:002b( 0005| 0|  3) 00000000 ffffffff 1 1
-01242203026i[CPU0  ] |  FS:0000( 0000| 0|  0) 00000000 00000000 0 0
-01242203026i[CPU0  ] |  GS:0000( 0000| 0|  0) 00000000 00000000 0 0
-01242203026i[CPU0  ] | EIP=00100029 (00100029)
-01242203026i[CPU0  ] | CR0=0x80000011 CR2=0x00000000
-01242203026i[CPU0  ] | CR3=0x00028000 CR4=0x00000000
-01242203026i[CMOS  ] Last time is 1538467206 (Tue Oct  2 10:00:06 2018)
-01242203026i[XGUI  ] Exit
-01242203026i[SIM   ] quit_sim called with exit code 0
+00031280364i[GDBST ] stopped with ac0
+00031280364i[XGUI  ] Mouse capture off
+00031280364i[XGUI  ] Mouse capture off
+00031280364i[XGUI  ] Mouse capture off
+00031280364i[GDBST ] addr 00000000000117d8 len 1
+00031280364i[XGUI  ] Mouse capture off
+00031280364i[GDBST ] addr 00000000000117c0 len 40
+00031280364i[XGUI  ] Mouse capture off
+00031280364i[GDBST ] addr 00000000000117d8 len 1
+00031280364i[XGUI  ] Mouse capture off
+00031280364i[XGUI  ] Mouse capture off
+00031280364i[GDBST ] stepping
+00031280365i[GDBST ] stopped with ac2
+00031280365i[XGUI  ] Mouse capture off
+00031280365i[XGUI  ] Mouse capture off
+00031280365i[GDBST ] Setting breakpoint at 00000000000117d8
+00031280365i[XGUI  ] Mouse capture off
+00031280365i[XGUI  ] Mouse capture off
+00031292000i[KBD   ] internal keyboard buffer full, ignoring scancode.(13)
+00031292000i[KBD   ] internal keyboard buffer full, ignoring scancode.(15)
+00031292000i[KBD   ] internal keyboard buffer full, ignoring scancode.(93)
+00031292000i[KBD   ] internal keyboard buffer full, ignoring scancode.(95)
+03194449234p[      ] >>PANIC<< SIGNAL 2 caught
+03194449235i[GDBST ] stopped with ac1
+03194449235i[XGUI  ] Mouse capture off
+03194449235i[XGUI  ] Mouse capture off
+03194449235i[XGUI  ] Mouse capture off
+03194449235i[GDBST ] Removing breakpoint at 00000000000117d8
+03194449235i[XGUI  ] Mouse capture off
+03194449235i[GDBST ] addr 00000000000113c0 len 40
+03194449235i[XGUI  ] Mouse capture off

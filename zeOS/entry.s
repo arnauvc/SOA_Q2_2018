@@ -71,7 +71,13 @@ sysenter_fin:
 
 
 .globl write_msr; .type write_msr, @function; .align 0; write_msr:
+    push %ebp
+    mov %esp, %ebp
+
     mov $0, %edx
-    mov %ebx, %eax
+    mov 8(%ebp), %eax
+    mov 12(%ebp), %ecx
     wrmsr
+
+    pop %ebp
     ret

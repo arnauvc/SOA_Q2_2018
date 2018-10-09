@@ -1,4 +1,6 @@
 #include <asm.h>
+#include <errno.h>
+
 ENTRY(write)
 	push %ebp
 	push %ebx
@@ -7,27 +9,25 @@ ENTRY(write)
 	mov 12(%ebp), %ecx
 	mov 8(%ebp), %ebx  
 	mov 4, %EAX
-	sysenter $0x80
-	cmp %eax, $0
-	jge return
+	sysenter
+	cmpl $0, %eax
+	jge return2
 	movl $-ENOSYS, %eax
-	jmp fi
-return:
+	
+return2:
 	mov %ebp, %esp
 	pop %ebx
 	pop %ebp
 	sysexit
-fi:
-
 
 
 ENTRY(gettime)
 	mov 10, %eax
-	sysenter %0x80
-	cmp %eax, $0
-	jge return
+	sysenter
+	cmpl $0, %eax
+	jge return1
 	movl $-ENOSYS, %eax
-return:
+return1:
 	sysexit
 
 		
