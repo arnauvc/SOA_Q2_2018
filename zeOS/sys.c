@@ -30,17 +30,6 @@ int check_fd(int fd, int permissions)
 char bufferdest[4096]; 
 
 int sys_write(int fd, char * buffer, int size) {
-  /*
-  Check user parameters
-    -fd
-    -buffer
-    -size
-  Copy data from/to user address space
-
-  int sys_write_console (char *buffer, int size);
-
-  return result
-  */
 	
 	int comprovar = check_fd(fd,ESCRIPTURA);
 	if (comprovar != 0) return -1;
@@ -63,12 +52,10 @@ int sys_write(int fd, char * buffer, int size) {
 		if (copy_from_user(buffer, bufferdest, 4096) != 0) return -1;
 		if (sys_write_console(bufferdest, size) <= 0) return -1;
 	}
-
 	return 0;
 	
-
-
 }
+
 
 
 int sys_gettime() {

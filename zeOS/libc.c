@@ -7,6 +7,11 @@
 #include <types.h>
 
 int errno;
+/*
+void perror(const char *str){
+  write(1, str, strlen(str));
+}
+*/
 
 void itoa(int a, char *b)
 {

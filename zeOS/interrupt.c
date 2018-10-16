@@ -10,6 +10,7 @@
 #include <zeos_interrupt.h>
 #include <system.h>
 
+
 Gate idt[IDT_ENTRIES];
 Register    idtR;
 
@@ -116,6 +117,7 @@ void setIdt()
   //setTrapHandler(0x80, system_call_handler, 3);
   setInterruptHandler(32, clock_handler, 0);
   int error1 = write_msr(__KERNEL_CS, 0x174);
+  
   int error2 = write_msr(INITIAL_ESP, 0x175);
   int error3 = write_msr((int)syscall_handler_sysenter, 0x176);
 
