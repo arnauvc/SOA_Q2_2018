@@ -8,6 +8,8 @@
 
 int write_msr(int val_msr, int num_msr);
 void task_switch_asm(union task_union *new);
+void inn_task_switch(unsigned long * current_esp, unsigned long * new_esp);
+
 
 struct list_head freequeue; // Cua de task_structs lliures
 struct list_head readyqueue; // Cua de task_structs(processos) en ready per entrar a la CPU
@@ -56,18 +58,18 @@ void inner_task_switch(union task_union *new) {
   //  Update the pointer to the system stack to point to the stack of new_task.
   tss.esp0 = (unsigned long) &new->stack[KERNEL_STACK_SIZE];
   // Update MSR number 0x175
-  write_msr(tss.esp0,0x175); //Falta definir quin valor donar-li
+  write_msr(tss.esp0,0x175); 
+
   // Changing user adress space
   set_cr3(new->task.dir_pages_baseAddr);
-  // Store EBP in PCB
-  
 
+
+  //new.task //tasl_struct del nou process
+  //current() //task_struct del process actual
+  inn_task_switch( &(current()->kernel_esp), &(new->task.kernel_esp) );
 
 }
 
-void task_switch(union task_union *new) {
-	task_switch_asm(new);
-}
 
 void cpu_idle(void)
 {

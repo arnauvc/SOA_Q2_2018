@@ -129,7 +129,7 @@ sysenter_fin:
 
 ENTRY(write_msr)
     push %ebp
-    mov %esp, %ebp
+    mov %ebp, %esp
 
     mov $0, %edx
     mov 8(%ebp), %eax
@@ -139,18 +139,32 @@ ENTRY(write_msr)
     pop %ebp
     ret
 
-ENTRY(task_switch_asm)
+ENTRY(task_switch)
   push %ebp
-  mov %esp, %ebp
+  mov %ebp, %esp
 
   push %esi
   push %edi
   push %ebx
-  mov 8(%ebp), %eax
-  call inner_task_switch(%eax)
+  #push new
+  mov 8(%ebp),%ebx
+  call inner_task_switch
 
+  add $4, %esp
   pop %ebx
   pop %edi
   pop %esi
+
   mov %esp, %ebp
   pop %ebp
+
+ENTRY(inn_task_switch)
+  push %ebp
+  mov %ebp, %esp
+  
+  mov %ebp ,8(%ebp)
+  mov 12(%ebp), %esp
+  
+  mov %esp, %ebp
+  pop %ebp
+  ret

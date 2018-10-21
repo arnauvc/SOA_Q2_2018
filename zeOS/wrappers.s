@@ -12,7 +12,7 @@
 
 .globl write; .type write, @function; .align 0; write:
  push %ebp
- mov %esp, %ebp
+ mov %ebp, %esp
 
  push %ebx
  push %esi

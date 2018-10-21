@@ -72,7 +72,7 @@ sysenter_fin:
 
 .globl write_msr; .type write_msr, @function; .align 0; write_msr:
     push %ebp
-    mov %esp, %ebp
+    mov %ebp, %esp
 
     mov $0, %edx
     mov 8(%ebp), %eax
@@ -82,18 +82,32 @@ sysenter_fin:
     pop %ebp
     ret
 
-.globl task_switch_asm; .type task_switch_asm, @function; .align 0; task_switch_asm:
+.globl task_switch; .type task_switch, @function; .align 0; task_switch:
   push %ebp
-  mov %esp, %ebp
+  mov %ebp, %esp
 
   push %esi
   push %edi
   push %ebx
-  mov 8(%ebp), %eax
-  call inner_task_switch(%eax)
+  #push new
+  mov 8(%ebp),%ebx
+  call inner_task_switch
 
+  add $4, %esp
   pop %ebx
   pop %edi
   pop %esi
+
   mov %esp, %ebp
   pop %ebp
+
+.globl inn_task_switch; .type inn_task_switch, @function; .align 0; inn_task_switch:
+  push %ebp
+  mov %ebp, %esp
+
+  mov %ebp ,8(%ebp)
+  mov 12(%ebp), %esp
+
+  mov %esp, %ebp
+  pop %ebp
+  ret
