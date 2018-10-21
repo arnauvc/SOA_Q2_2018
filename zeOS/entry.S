@@ -138,3 +138,19 @@ ENTRY(write_msr)
 
     pop %ebp
     ret
+
+ENTRY(task_switch_asm)
+  push %ebp
+  mov %esp, %ebp
+
+  push %esi
+  push %edi
+  push %ebx
+  mov 8(%ebp), %eax
+  call inner_task_switch(%eax)
+
+  pop %ebx
+  pop %edi
+  pop %esi
+  mov %esp, %ebp
+  pop %ebp

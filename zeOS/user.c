@@ -5,6 +5,8 @@ char buff[24];
 
 int pid;
 
+
+/*
 int add2(int par1,int par2);
 
 int add(int par1,int par2)
@@ -28,6 +30,10 @@ long outer(long n)
 	for (i=0; i<n; i++) acum = acum + inner(i);
 	return acum;
 }
+*/
+
+
+
 
 char buffer[32] = "abc";
 

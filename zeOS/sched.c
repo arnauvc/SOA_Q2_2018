@@ -6,6 +6,8 @@
 #include <mm.h>
 #include <io.h>
 
+int write_msr(int val_msr, int num_msr);
+void task_switch_asm(union task_union *new);
 
 struct list_head freequeue; // Cua de task_structs lliures
 struct list_head readyqueue; // Cua de task_structs(processos) en ready per entrar a la CPU
@@ -52,9 +54,9 @@ int allocate_DIR(struct task_struct *t)
 
 void inner_task_switch(union task_union *new) {
   //  Update the pointer to the system stack to point to the stack of new_task.
-  tss.esp0 = &new->stack[KERNEL_STACK_SIZE];
+  tss.esp0 = (unsigned long) &new->stack[KERNEL_STACK_SIZE];
   // Update MSR number 0x175
-  write_msr(,0x175);
+  write_msr(tss.esp0,0x175); //Falta definir quin valor donar-li
   // Changing user adress space
   set_cr3(new->task.dir_pages_baseAddr);
   // Store EBP in PCB
@@ -64,16 +66,7 @@ void inner_task_switch(union task_union *new) {
 }
 
 void task_switch(union task_union *new) {
-  // Save ESI, EDI, EBX
-  pushl %esi;
-  pushl %edi;
-  pushl %ebx;
-  // Call inner_task_switch
-  inner_task_switch(new);
-  // Restore ESI, EDI, EBX
-  popl %ebx;
-  popl %edi;
-  popl %esi;
+	task_switch_asm(new);
 }
 
 void cpu_idle(void)
@@ -84,6 +77,7 @@ void cpu_idle(void)
 	{
 	;
 	}
+
 }
 
 void init_idle (void) {
@@ -97,7 +91,7 @@ void init_idle (void) {
 	 //inicialitzar context execucio
 	 task[0].stack[KERNEL_STACK_SIZE-1] = (int)*cpu_idle; // @adreça retorn
 	 task[0].stack[KERNEL_STACK_SIZE-2] = 0; //ebp (no importa el valor)
-	 task[0].task.kernel_esp = & task[0].stack[KERNEL_STACK_SIZE-2];
+	 task[0].task.kernel_esp = task[0].stack[KERNEL_STACK_SIZE-2];
 
 	 //Initialize global variable idle_task
 	 idle_task =  idle_task_struct;
@@ -117,9 +111,10 @@ void init_task1(void) {
 
    //////////////////////////////////////////
    // Update of TSS;
-   tss.esp0 = &init_union->stack[KERNEL_STACK_SIZE];
+   tss.esp0 = (unsigned long) &init_union->stack[KERNEL_STACK_SIZE];
    // Modify MSR number 0x175
-   write_msr(,0x175);
+   write_msr(tss.esp0,0x175); ///////////   	Aixo no ho tinc gens clar ////////////////
+
    set_cr3(dir_task1);
 
 }
