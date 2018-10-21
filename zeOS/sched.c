@@ -27,25 +27,25 @@ extern struct list_head blocked;
 
 
 /* get_DIR - Returns the Page Directory address for task 't' */
-page_table_entry * get_DIR (struct task_struct *t) 
+page_table_entry * get_DIR (struct task_struct *t)
 {
 	return t->dir_pages_baseAddr;
 }
 
 /* get_PT - Returns the Page Table address for task 't' */
-page_table_entry * get_PT (struct task_struct *t) 
+page_table_entry * get_PT (struct task_struct *t)
 {
 	return (page_table_entry *)(((unsigned int)(t->dir_pages_baseAddr->bits.pbase_addr))<<12);
 }
 
 
-int allocate_DIR(struct task_struct *t) 
+int allocate_DIR(struct task_struct *t)
 {
 	int pos;
 
 	pos = ((int)t-(int)task)/sizeof(union task_union);
 
-	t->dir_pages_baseAddr = (page_table_entry*) &dir_pages[pos]; 
+	t->dir_pages_baseAddr = (page_table_entry*) &dir_pages[pos];
 
 	return 1;
 }
@@ -64,7 +64,8 @@ void init_idle (void){
 	 struct list_head * idle_list_head = list_first( &freequeue );
 	 struct task_struct * idle_task_struct = list_head_to_task_struct(idle_list_head);
 	 idle_task_struct->PID = 0;
-	 int result_allocate = allocate_DIR(idle_task_struct); //dir_pages_baseAddr 
+   ///////////////////////////////////////////
+	 idle_task_struct->dir_pages_baseAddr = allocate_DIR(idle_task_struct); //dir_pages_baseAddr
 
 	 //inicialitzar context execucio
 	 task[0].stack[KERNEL_STACK_SIZE-1] = (int)*cpu_idle; // @adreça retorn
@@ -75,8 +76,18 @@ void init_idle (void){
 	 idle_task =  idle_task_struct;
 }
 
-void init_task1(void){
+void init_task1(void) {
+   struct list_head * task1_list_head = list_first( &freequeue );
+   struct task_struct * task1_task_struct = list_head_to_task_struct(task1_list_head);
+   task1_task_struct->PID = 1;
+   ///////////////////////////////////////////
+   idle_task_struct->dir_pages_baseAddr = allocate_DIR(task1_task_struct); //dir_pages_baseAddr
 
+   set_user_pages( task1_task_struct );
+
+   //////////////////////////////////////////
+   setTSS();
+   set_cr3(page_table_entry * dir);
 
 }
 
@@ -89,18 +100,17 @@ void init_sched(){
 	for(int i = 0; i < NR_TASKS; ++i){
 		list_add( &(task[i].task.list), &freequeue );
 	}
-	
+
 
 }
 
 struct task_struct* current()
 {
   int ret_value;
-  
+
   __asm__ __volatile__(
   	"movl %%esp, %0"
 	: "=g" (ret_value)
   );
   return (struct task_struct*)(ret_value&0xfffff000);
 }
-
