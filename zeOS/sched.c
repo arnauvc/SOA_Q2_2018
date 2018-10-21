@@ -50,6 +50,32 @@ int allocate_DIR(struct task_struct *t)
 	return 1;
 }
 
+void inner_task_switch(union task_union *new) {
+  //  Update the pointer to the system stack to point to the stack of new_task.
+  tss.esp0 = &new->stack[KERNEL_STACK_SIZE];
+  // Update MSR number 0x175
+  write_msr(,0x175);
+  // Changing user adress space
+  set_cr3(new->task.dir_pages_baseAddr);
+  // Store EBP in PCB
+  
+
+
+}
+
+void task_switch(union task_union *new) {
+  // Save ESI, EDI, EBX
+  pushl %esi;
+  pushl %edi;
+  pushl %ebx;
+  // Call inner_task_switch
+  inner_task_switch(new);
+  // Restore ESI, EDI, EBX
+  popl %ebx;
+  popl %edi;
+  popl %esi;
+}
+
 void cpu_idle(void)
 {
 	__asm__ __volatile__("sti": : :"memory");
@@ -60,12 +86,13 @@ void cpu_idle(void)
 	}
 }
 
-void init_idle (void){
+void init_idle (void) {
 	 struct list_head * idle_list_head = list_first( &freequeue );
 	 struct task_struct * idle_task_struct = list_head_to_task_struct(idle_list_head);
+
 	 idle_task_struct->PID = 0;
    ///////////////////////////////////////////
-	 idle_task_struct->dir_pages_baseAddr = allocate_DIR(idle_task_struct); //dir_pages_baseAddr
+	 int allocate_result = allocate_DIR(idle_task_struct); //dir_pages_baseAddr
 
 	 //inicialitzar context execucio
 	 task[0].stack[KERNEL_STACK_SIZE-1] = (int)*cpu_idle; // @adreça retorn
@@ -81,23 +108,29 @@ void init_task1(void) {
    struct task_struct * task1_task_struct = list_head_to_task_struct(task1_list_head);
    task1_task_struct->PID = 1;
    ///////////////////////////////////////////
-   idle_task_struct->dir_pages_baseAddr = allocate_DIR(task1_task_struct); //dir_pages_baseAddr
+   int allocate_result = allocate_DIR(task1_task_struct); //dir_pages_baseAddr
+   page_table_entry * dir_task1 = get_DIR(task1_task_struct);
 
    set_user_pages( task1_task_struct );
+   // Creation of Task Union
+   union task_union * init_union = (union task_union *) task1_task_struct;
 
    //////////////////////////////////////////
-   setTSS();
-   set_cr3(page_table_entry * dir);
+   // Update of TSS;
+   tss.esp0 = &init_union->stack[KERNEL_STACK_SIZE];
+   // Modify MSR number 0x175
+   write_msr(,0x175);
+   set_cr3(dir_task1);
 
 }
 
 
-void init_sched(){
+void init_sched() {
 	INIT_LIST_HEAD( &freequeue );
 	INIT_LIST_HEAD( &readyqueue );
 
 	//Afegirx tots els task_structs a la freequeue;
-	for(int i = 0; i < NR_TASKS; ++i){
+	for (int i = 0; i < NR_TASKS; ++i) {
 		list_add( &(task[i].task.list), &freequeue );
 	}
 
