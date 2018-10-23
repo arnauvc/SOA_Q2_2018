@@ -28,7 +28,8 @@ struct task_struct *list_head_to_task_struct(struct list_head *l)
 #endif
 
 struct task_struct *list_head_to_task_struct(struct list_head *l){
-  task_struct * p;
+  struct task_struct *p;
+  p = ((struct task_struct *)((char *)(l)-(unsigned long)(&((struct task_struct *)0xfffff000)->list)));
   return p;
 }
 
@@ -63,7 +64,7 @@ void inner_task_switch(union task_union *new) {
   //  Update the pointer to the system stack to point to the stack of new_task.
   tss.esp0 = (unsigned long) &new->stack[KERNEL_STACK_SIZE];
   // Update MSR number 0x175
-  write_msr(tss.esp0,0x175); 
+  write_msr(tss.esp0,0x175);
 
   // Changing user adress space
   set_cr3(new->task.dir_pages_baseAddr);
@@ -103,7 +104,7 @@ void init_idle (void) {
    //inicialitzar context execucio
    union_task->stack[KERNEL_STACK_SIZE-1] = (unsigned long) &cpu_idle; // @adreça retorn
    union_task->stack[KERNEL_STACK_SIZE-2] = 0; //ebp (no importa el valor)
-   union_task->task.kernel_esp =(unsigned long) &(union_task->stack[KERNEL_STACK_SIZE-2]); 
+   union_task->task.kernel_esp =(unsigned long) &(union_task->stack[KERNEL_STACK_SIZE-2]);
 
    //Initialize global variable idle_task
    idle_task =  idle_task_struct;
@@ -128,7 +129,7 @@ void init_task1(void) {
    // Update of TSS;
    tss.esp0 = (unsigned long) & init_union->stack[KERNEL_STACK_SIZE];
    // Modify MSR number 0x175
-   write_msr(tss.esp0,0x175); ///////////   
+   write_msr(tss.esp0,0x175); ///////////
 
    set_cr3(dir_task1);
 
