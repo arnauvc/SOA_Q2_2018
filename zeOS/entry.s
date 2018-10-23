@@ -98,16 +98,17 @@ sysenter_fin:
   pop %edi
   pop %esi
 
-  mov %esp, %ebp
+ # mov %esp, %ebp
   pop %ebp
+  ret
 
 .globl inn_task_switch; .type inn_task_switch, @function; .align 0; inn_task_switch:
   push %ebp
   mov %ebp, %esp
-
-  mov %ebp ,8(%ebp)
+  mov 8(%ebp), %eax
+  mov %ebp ,(%eax)
   mov 12(%ebp), %esp
 
-  mov %esp, %ebp
+  #mov %esp, %ebp
   pop %ebp
   ret

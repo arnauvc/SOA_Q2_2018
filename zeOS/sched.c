@@ -7,7 +7,7 @@
 #include <io.h>
 
 int write_msr(int val_msr, int num_msr);
-void task_switch_asm(union task_union *new);
+void task_switch(union task_union *new);
 void inn_task_switch(unsigned long * current_esp, unsigned long * new_esp);
 
 
@@ -20,12 +20,17 @@ union task_union task[NR_TASKS]
   __attribute__((__section__(".data.task")));
 
 
-//#if 0
+#if 0
 struct task_struct *list_head_to_task_struct(struct list_head *l)
 {
   return list_entry( l, struct task_struct, list);
 }
-//#endif
+#endif
+
+struct task_struct *list_head_to_task_struct(struct list_head *l){
+  task_struct * p;
+  return p;
+}
 
 extern struct list_head blocked;
 
@@ -83,24 +88,32 @@ void cpu_idle(void)
 }
 
 void init_idle (void) {
-	 struct list_head * idle_list_head = list_first( &freequeue );
-	 struct task_struct * idle_task_struct = list_head_to_task_struct(idle_list_head);
 
-	 idle_task_struct->PID = 0;
+
+  struct list_head * idle_list_head = list_first( &freequeue );
+  list_del(idle_list_head);
+  struct task_struct * idle_task_struct = list_head_to_task_struct(idle_list_head);
+  union task_union *union_task = (union task_union*)idle_task_struct;
+
+   idle_task_struct->PID = 0;
    ///////////////////////////////////////////
-	 int allocate_result = allocate_DIR(idle_task_struct); //dir_pages_baseAddr
+   int allocate_result = allocate_DIR(idle_task_struct); //dir_pages_baseAddr
 
-	 //inicialitzar context execucio
-	 task[0].stack[KERNEL_STACK_SIZE-1] = (int)*cpu_idle; // @adreça retorn
-	 task[0].stack[KERNEL_STACK_SIZE-2] = 0; //ebp (no importa el valor)
-	 task[0].task.kernel_esp = task[0].stack[KERNEL_STACK_SIZE-2];
 
-	 //Initialize global variable idle_task
-	 idle_task =  idle_task_struct;
+   //inicialitzar context execucio
+   union_task->stack[KERNEL_STACK_SIZE-1] = (unsigned long) &cpu_idle; // @adreça retorn
+   union_task->stack[KERNEL_STACK_SIZE-2] = 0; //ebp (no importa el valor)
+   union_task->task.kernel_esp =(unsigned long) &(union_task->stack[KERNEL_STACK_SIZE-2]); 
+
+   //Initialize global variable idle_task
+   idle_task =  idle_task_struct;
+
+
 }
 
 void init_task1(void) {
    struct list_head * task1_list_head = list_first( &freequeue );
+   list_del(task1_list_head);
    struct task_struct * task1_task_struct = list_head_to_task_struct(task1_list_head);
    task1_task_struct->PID = 1;
    ///////////////////////////////////////////
@@ -113,9 +126,9 @@ void init_task1(void) {
 
    //////////////////////////////////////////
    // Update of TSS;
-   tss.esp0 = (unsigned long) &init_union->stack[KERNEL_STACK_SIZE];
+   tss.esp0 = (unsigned long) & init_union->stack[KERNEL_STACK_SIZE];
    // Modify MSR number 0x175
-   write_msr(tss.esp0,0x175); ///////////   	Aixo no ho tinc gens clar ////////////////
+   write_msr(tss.esp0,0x175); ///////////   
 
    set_cr3(dir_task1);
 

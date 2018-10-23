@@ -155,16 +155,17 @@ ENTRY(task_switch)
   pop %edi
   pop %esi
 
-  mov %esp, %ebp
+ # mov %esp, %ebp
   pop %ebp
+  ret
 
 ENTRY(inn_task_switch)
   push %ebp
   mov %ebp, %esp
-  
-  mov %ebp ,8(%ebp)
+  mov 8(%ebp), %eax
+  mov %ebp ,(%eax)
   mov 12(%ebp), %esp
   
-  mov %esp, %ebp
+  #mov %esp, %ebp
   pop %ebp
   ret
