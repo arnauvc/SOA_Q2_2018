@@ -28,9 +28,8 @@ struct task_struct *list_head_to_task_struct(struct list_head *l)
 #endif
 
 struct task_struct *list_head_to_task_struct(struct list_head *l){
-  unsigned int value = ( (unsigned int)((*l))&(0xfffff000) );
-  struct task_struct *p = (struct task_struct *)value;
-  return p;
+
+	return (struct task_struct *)(((unsigned long)(l->next->next))&0xfffff000);
 }
 
 extern struct list_head blocked;
