@@ -29,7 +29,7 @@ struct task_struct *list_head_to_task_struct(struct list_head *l)
 
 struct task_struct *list_head_to_task_struct(struct list_head *l){
 
-	return (struct task_struct *)(((unsigned long)(l->next->next))&0xfffff000);
+	return (struct task_struct *)((unsigned long)l&0xfffff000);
 }
 
 extern struct list_head blocked;
@@ -70,8 +70,10 @@ void inner_task_switch(union task_union *new) {
 
 
   //new.task //tasl_struct del nou process
+  struct task_struct* new_task = (struct task_struct*) new;
   //current() //task_struct del process actual
-  inn_task_switch( &(current()->kernel_esp), &(new->task.kernel_esp) );
+  struct task_struct* current_task = current();
+  inn_task_switch( &(current_task->kernel_esp), &(new_task->kernel_esp) );
 
 }
 

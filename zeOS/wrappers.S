@@ -46,7 +46,7 @@ fi:
 
 
 ENTRY(gettime)
-	mov 10, %eax
+	mov $10, %eax
 	sysenter
 	cmpl $0, %eax
 	jge return3
@@ -55,4 +55,12 @@ return3:
 	ret
 	#sysexit
 
+
+
+ENTRY(getpid)
+	mov $20, %eax
+	sysenter
+	ret
+
+ENTRY(fork)
 		
