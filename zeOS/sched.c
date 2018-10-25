@@ -8,7 +8,7 @@
 
 int write_msr(int val_msr, int num_msr);
 void task_switch(union task_union *new);
-void inn_task_switch(unsigned long * current_esp, unsigned long * new_esp);
+void inn_task_switch(unsigned long current_esp, unsigned long  new_esp);
 
 
 struct list_head freequeue; // Cua de task_structs lliures
@@ -60,21 +60,26 @@ int allocate_DIR(struct task_struct *t)
 }
 
 void inner_task_switch(union task_union *new) {
+
+	// Changing user adress space
+ 	//set_cr3(new->task.dir_pages_baseAddr);
+
   //  Update the pointer to the system stack to point to the stack of new_task.
   tss.esp0 = (unsigned long) &new->stack[KERNEL_STACK_SIZE];
   // Update MSR number 0x175
   write_msr(tss.esp0,0x175);
 
-  // Changing user adress space
-  set_cr3(new->task.dir_pages_baseAddr);
+ 	// Changing user adress space
+  set_cr3(new->task.dir_pages_baseAddr); 
 
 
-  //new.task //tasl_struct del nou process
+  //new.task //task_struct del nou process
   struct task_struct* new_task = (struct task_struct*) new;
   //current() //task_struct del process actual
   struct task_struct* current_task = current();
-  inn_task_switch( &(current_task->kernel_esp), &(new_task->kernel_esp) );
 
+  //inn_task_switch( &(current_task->kernel_esp), &(new_task->kernel_esp) ); // Perque passem direccions en comptes de valors??
+   inn_task_switch( current_task->kernel_esp, new_task->kernel_esp );
 }
 
 
@@ -108,7 +113,8 @@ void init_idle (void) {
    union_task->task.kernel_esp =(unsigned long) &(union_task->stack[KERNEL_STACK_SIZE-2]);
 
    //Initialize global variable idle_task
-   idle_task =  idle_task_struct;
+   //idle_task =  idle_task_struct;
+   idle_task = (struct task_struct *)union_task;
 
 
 }

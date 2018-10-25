@@ -9,6 +9,7 @@
 #include <errno.h>
 #include <zeos_interrupt.h>
 #include <system.h>
+#include <sched.h>
 
 
 Gate idt[IDT_ENTRIES];
@@ -94,6 +95,9 @@ void keyboard_routine() {
 		if (lletra != '\0' ) printc_xy(0,0,char_map[(c & 0x7F)]);
 		else printc_xy(0,0, 'c');
 	}
+
+  task_switch((union task_union *)idle_task); //hauria de ser aixi pero no ho agafa
+ // task_switch(&task[0]);
 }
 
 int zeos_ticks = 0;

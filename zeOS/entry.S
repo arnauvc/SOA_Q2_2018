@@ -146,11 +146,18 @@ ENTRY(task_switch)
   push %esi
   push %edi
   push %ebx
+
   #push new
   mov 8(%ebp),%ebx
+
+
+  #Jo crec que aqui falta aixo
+  push %ebx
+  #############
+
   call inner_task_switch
 
-  add $4, %esp
+  add $4, %esp ##Desempila el new = desmpila el ebx d'abans
   pop %ebx
   pop %edi
   pop %esi
@@ -162,10 +169,11 @@ ENTRY(task_switch)
 ENTRY(inn_task_switch)
   push %ebp
   mov %esp, %ebp
+
   mov 8(%ebp), %eax
   mov %ebp ,(%eax)
   mov 12(%ebp), %esp
   
-  
+  #En principi aqui ja estem al nou proces. Fem pop del ebp que en el cas del idle es 0, i saltem a cpu_idle.
   pop %ebp
   ret
