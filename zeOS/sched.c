@@ -129,8 +129,9 @@ void init_task1(void) {
    //////////////////////////////////////////
    // Update of TSS;
    tss.esp0 = (unsigned long) &(init_union->stack[KERNEL_STACK_SIZE]);
+
    // Modify MSR number 0x175
-   write_msr(tss.esp0,0x175); ///////////
+   write_msr((unsigned long) &(init_union->stack[KERNEL_STACK_SIZE]),0x175); ///////////
 
    set_cr3(dir_task1);
 

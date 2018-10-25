@@ -376,7 +376,7 @@ Disassembly of section .text:
 
 0001037e <write_msr>:
    1037e:	55                   	push   %ebp
-   1037f:	89 ec                	mov    %ebp,%esp
+   1037f:	89 e5                	mov    %esp,%ebp
    10381:	ba 00 00 00 00       	mov    $0x0,%edx
    10386:	8b 45 08             	mov    0x8(%ebp),%eax
    10389:	8b 4d 0c             	mov    0xc(%ebp),%ecx
@@ -386,7 +386,7 @@ Disassembly of section .text:
 
 00010390 <task_switch>:
    10390:	55                   	push   %ebp
-   10391:	89 ec                	mov    %ebp,%esp
+   10391:	89 e5                	mov    %esp,%ebp
    10393:	56                   	push   %esi
    10394:	57                   	push   %edi
    10395:	53                   	push   %ebx
@@ -401,7 +401,7 @@ Disassembly of section .text:
 
 000103a6 <inn_task_switch>:
    103a6:	55                   	push   %ebp
-   103a7:	89 ec                	mov    %ebp,%esp
+   103a7:	89 e5                	mov    %esp,%ebp
    103a9:	8b 45 08             	mov    0x8(%ebp),%eax
    103ac:	89 28                	mov    %ebp,(%eax)
    103ae:	8b 65 0c             	mov    0xc(%ebp),%esp
@@ -723,7 +723,7 @@ Disassembly of section .text:
 
 000106d0 <init_task1>:
    106d0:	55                   	push   %ebp
-	   106d1:	89 e5                	mov    %esp,%ebp
+   106d1:	89 e5                	mov    %esp,%ebp
    106d3:	57                   	push   %edi
    106d4:	56                   	push   %esi
    106d5:	53                   	push   %ebx
@@ -6689,15 +6689,16 @@ Disassembly of section .debug_info:
     1507:	cf                   	iret   
     1508:	04 00                	add    $0x0,%al
     150a:	00 01                	add    %al,(%ecx)
-    150c:	98                   	cwtl   
+    150c:	99                   	cltd   
     150d:	bd 04 00 00 01       	mov    $0x1000004,%ebp
     1512:	f7 04 00 00 18 87 04 	testl  $0x4871800,(%eax,%eax,1)
     1519:	00 00                	add    %al,(%eax)
-    151b:	01 9a d3 03 00 00    	add    %ebx,0x3d3(%edx)
+    151b:	01 9b d3 03 00 00    	add    %ebx,0x3d3(%ebx)
     1521:	00 19                	add    %bl,(%ecx)
     1523:	d5 01                	aad    $0x1
     1525:	00 00                	add    %al,(%eax)
-    1527:	01 8c 60 07 01 00 60 	add    %ecx,0x60000107(%eax,%eiz,2)
+    1527:	01 8d 60 07 01 00    	add    %ecx,0x10760(%ebp)
+    152d:	60                   	pusha  
     152e:	00 00                	add    %al,(%eax)
     1530:	00 01                	add    %al,(%ecx)
     1532:	9c                   	pushf  
@@ -6709,7 +6710,7 @@ Disassembly of section .debug_info:
     153e:	00 00                	add    %al,(%eax)
     1540:	30 05 00 00 1b 69    	xor    %al,0x691b0000
     1546:	00 01                	add    %al,(%ecx)
-    1548:	91                   	xchg   %eax,%ecx
+    1548:	92                   	xchg   %eax,%edx
     1549:	d3 03                	roll   %cl,(%ebx)
     154b:	00 00                	add    %al,(%eax)
     154d:	71 01                	jno    1550 <MAX_SYSCALL+0x153b>
@@ -14678,11 +14679,12 @@ Disassembly of section .debug_line:
  2b5:	bc d9 08 3e 58       	mov    $0x583e08d9,%esp
  2ba:	da 3a                	fidivrl (%edx)
  2bc:	e6 af                	out    %al,$0xaf
- 2be:	03 d7                	add    %edi,%edx
- 2c0:	00 90 03 b0 7f 2e    	add    %dl,0x2e7fb003(%eax)
- 2c6:	03 d4                	add    %esp,%edx
+ 2be:	03 d8                	add    %eax,%ebx
+ 2c0:	00 90 03 af 7f 2e    	add    %dl,0x2e7faf03(%eax)
+ 2c6:	03 d5                	add    %ebp,%edx
  2c8:	00 20                	add    %ah,(%eax)
- 2ca:	03 ac 7f 58 d8 03 0e 	add    0xe03d858(%edi,%edi,2),%ebp
+ 2ca:	03 ab 7f 58 d8 03    	add    0x3d8587f(%ebx),%ebp
+ 2d0:	0e                   	push   %cs
  2d1:	08 12                	or     %dl,(%edx)
  2d3:	f6 3b                	idivb  (%ebx)
  2d5:	83 03 40             	addl   $0x40,(%ebx)
@@ -14708,7 +14710,7 @@ Disassembly of section .debug_line:
  30b:	4c                   	dec    %esp
  30c:	03 c4                	add    %esp,%eax
  30e:	00 f2                	add    %dh,%dl
- 310:	88 e6                	mov    %ah,%dh
+ 310:	88 e7                	mov    %ah,%bh
  312:	ca 84 08             	lret   $0x884
  315:	93                   	xchg   %eax,%ebx
  316:	08 3d 08 21 00 02    	or     %bh,0x2002108

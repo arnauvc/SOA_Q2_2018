@@ -3,7 +3,7 @@
 
 ENTRY(write)
 	push %ebp
-	mov %ebp, %esp
+	mov %esp, %ebp
 
 	push %ebx
 	push %esi
