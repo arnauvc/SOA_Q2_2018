@@ -148,16 +148,12 @@ ENTRY(task_switch)
   push %ebx
 
   #push new
-  mov 8(%ebp),%ebx
-
-
-  #Jo crec que aqui falta aixo
-  push %ebx
-  #############
+  push 8(%ebp)
 
   call inner_task_switch
 
   add $4, %esp ##Desempila el new = desmpila el ebx d'abans
+
   pop %ebx
   pop %edi
   pop %esi
@@ -167,13 +163,18 @@ ENTRY(task_switch)
   ret
 
 ENTRY(inn_task_switch)
-  push %ebp
-  mov %esp, %ebp
-
-  mov 8(%ebp), %eax
-  mov %ebp ,(%eax)
-  mov 12(%ebp), %esp
   
+  #Agafem el punter al current()->kernel_esp
+  mov 4(%esp), %eax
+  
+  #Accedim al valor apuntat per el current()->kernel_esp per donar-li el valor de ebp
+  mov %ebp ,(%eax)
+  
+  #Modifiquem el nostre %esp, amb el new()->kernel_esp
+  mov 8(%esp), %esp
+  
+
+
   #En principi aqui ja estem al nou proces. Fem pop del ebp que en el cas del idle es 0, i saltem a cpu_idle.
   pop %ebp
   ret

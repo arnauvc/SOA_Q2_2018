@@ -63,23 +63,28 @@ void inner_task_switch(union task_union *new) {
 
 	// Changing user adress space
  	//set_cr3(new->task.dir_pages_baseAddr);
-
+	page_table_entry *dir = get_DIR(&new->task);
   //  Update the pointer to the system stack to point to the stack of new_task.
   tss.esp0 = (unsigned long) &new->stack[KERNEL_STACK_SIZE];
   // Update MSR number 0x175
   write_msr(tss.esp0,0x175);
 
  	// Changing user adress space
-  set_cr3(new->task.dir_pages_baseAddr); 
+  set_cr3(dir); 
+
+  //Testing
+  unsigned long cke = current()->kernel_esp;
+  unsigned long nke = new->task.kernel_esp;
 
 
+  /*
   //new.task //task_struct del nou process
   struct task_struct* new_task = (struct task_struct*) new;
   //current() //task_struct del process actual
   struct task_struct* current_task = current();
-
+	*/
   //inn_task_switch( &(current_task->kernel_esp), &(new_task->kernel_esp) ); // Perque passem direccions en comptes de valors??
-   inn_task_switch( current_task->kernel_esp, new_task->kernel_esp );
+   inn_task_switch( &current()->kernel_esp, new->task.kernel_esp);
 }
 
 
@@ -150,7 +155,8 @@ void init_sched() {
 
 	//Afegirx tots els task_structs a la freequeue;
 	for (int i = 0; i < NR_TASKS; ++i) {
-		list_add( &(task[i].task.list), &freequeue );
+		task[i].task.PID = -1; // He vist que ho feia el profe, per distingirlo del proces idle
+		list_add_tail( &(task[i].task.list), &freequeue );
 	}
 
 
