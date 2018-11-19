@@ -173,8 +173,6 @@ ENTRY(inn_task_switch)
   #Modifiquem el nostre %esp, amb el new()->kernel_esp
   mov 8(%esp), %esp
   
-
-
   #En principi aqui ja estem al nou proces. Fem pop del ebp que en el cas del idle es 0, i saltem a cpu_idle.
   pop %ebp
   ret

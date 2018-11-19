@@ -276,25 +276,25 @@ struct list_head * get_task_list(struct task_struct *t) {
 	return &(t->list);
 }
 
+
 void block_process(struct list_head *block_queue) {
-	
+
 	struct task_struct *t = current();
 	struct stats *st = get_task_stats(t);
-		update_process_state(t, block_queue);
-		st->system_ticks = (get_ticks()-st->elapsed_total_ticks);
-		st->elapsed_total_ticks = get_ticks();
-		sched_next();	
+	st->system_ticks = get_ticks()-st->elapsed_total_ticks;
+	st->elapsed_total_ticks = get_ticks(); sched_next();
+	update_process_state(t, block_queue);
+
 }
 
-void unblock_process(struct task_struct *blocked) {
 
+void unblock_process(struct task_struct *blocked){
 	struct stats *st = get_task_stats(blocked);
-	struct list_head *l = get_task_list(blocked);
-		update_process_state(blocked, &readyqueue);
-		st->blocked_ticks += (get_ticks()-st->elapsed_total_ticks);
-		st->elapsed_total_ticks = get_ticks();
-		if(needs_sched()) {
-			update_process_state(current(), &readyqueue);
-			sched_next();
-		}
+	st->blocked_ticks += (get_ticks()-st->elapsed_total_ticks);
+	st->elapsed_total_ticks = get_ticks();
+	update_process_state(blocked, &readyqueue);
+	if (needs_sched()) {
+		update_process_state(current(), &readyqueue);
+		sched_next();
+	}
 }
