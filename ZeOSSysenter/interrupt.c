@@ -39,7 +39,7 @@ void clock_routine()
   zeos_show_clock();
   zeos_ticks ++;
   zeos_update_read_console_emul();
-
+  
 
   schedule();
 }
@@ -98,6 +98,7 @@ void setTrapHandler(int vector, void (*handler)(), int maxAccessibleFromPL)
 void clock_handler();
 void keyboard_handler();
 void system_call_handler();
+void int_call_handler();
 
 void setMSR(unsigned long msr_number, unsigned long high, unsigned long low);
 
@@ -116,6 +117,7 @@ void setIdt()
   
   set_handlers();
 
+  setTrapHandler(0x80, int_call_handler, 3);
   /* ADD INITIALIZATION CODE FOR INTERRUPT VECTOR */
   setInterruptHandler(32, clock_handler, 0);
   setInterruptHandler(33, keyboard_handler, 0);
