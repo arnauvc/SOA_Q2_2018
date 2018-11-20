@@ -144,6 +144,7 @@ int __attribute__ ((__section__(".text.main")))
 
 		default : //default	
 			estadistiques[1] = pid1;
+			WriteStats(getpid());
 		break;
 	}
 /*
