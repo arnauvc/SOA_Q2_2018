@@ -39,6 +39,7 @@ main (int argc, char *argv[])
 
   for (i=0; i<num_it; i++) {
 	  ret = write (connectionFD, "hola ",5);
+	  ret = sendto (connectionFD, "hola ",5);
 	  if (ret < 0)
 	  {
 		  perror ("Error writing to connection\n");

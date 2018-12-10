@@ -6,8 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
-#include <arpa/inet.h>
-#define EXIT_FAILURE 1
+
 
 // Create a socket and initialize it to be able to accept 
 // connections.
@@ -19,28 +18,29 @@
 int
 createServerSocket (int port)
 {
-	int fd = socket(AF_INET,SOCK_STREAM, 0);
-	if(fd == -1){
-		perror("incorrect socket");
-		exit(EXIT_FAILURE);
-	}
-	//struct sockaddr info_addr;
-	struct sockaddr_in addr;
+  int sockDesc, error;
+  struct sockaddr_in addr;
 
-	addr.sin_family = AF_INET;
-     	addr.sin_port = htons(port);
-	//addr.sin_addr.s_addr = INADDR_ANY;
-	inet_aton("127.0.0.1", &addr.sin_addr.s_addr);
-	
-	if(bind(fd, (struct sockaddr *) &addr, sizeof(addr)) < 0){
-	       	perror("ERROR on binding"); 
-		exit(1);
-	}
-	if(listen(fd,5) < 0){
-		perror("Error listen");
-		exit(1);
-	}
-	return fd;
+  /*socket*/
+  sockDesc = socket(AF_INET, SOCK_STREAM, 0);
+
+  if(sockDesc != -1) {
+
+    addr.sin_family = AF_INET;
+    addr.sin_addr.s_addr = INADDR_ANY;
+    addr.sin_port = htons(port);
+
+    /*bind*/
+    if (!bind(sockDesc, (struct sockaddr *) &addr, sizeof(addr))) { //returns 0 if OK
+
+      /*listen*/
+      if (listen(sockDesc, 5)) // 0 if OK
+        return -1;
+    
+    } else return -1;
+  }  
+
+  return sockDesc;
 }
 
 
@@ -52,13 +52,21 @@ createServerSocket (int port)
 int
 acceptNewConnections (int socket_fd)
 {
-	struct sockaddr_in cli_addr;
-	int clilen = sizeof(cli_addr);
-     	int newsockfd = accept(socket_fd, (struct sockaddr *) &cli_addr, &clilen);
-	if (newsockfd < 0) 
-        	perror("ERROR on accept");
-		exit(1);
-	return newsockfd;
+  struct sockaddr addr;
+  socklen_t len;
+
+  len = sizeof(socklen_t);
+  int channel = accept(socket_fd, &addr, &len);
+
+  if (errno == EINTR) 
+    channel = accept(socket_fd, &addr, &len);
+  
+  if (channel < 0) {
+
+    perror("error in accept");
+  }
+   
+  return channel;
 }
 
 // Returns the socket virtual device that the client should use to access 

@@ -2,8 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 
-
-doService(int fd) {
+void doService(int fd) {
 int i = 0;
 char buff[80];
 char buff2[80];
@@ -49,7 +48,7 @@ main (int argc, char *argv[])
     }
 
   port = atoi(argv[1]);
-  socketFD = createServerSocket (port);
+  socketFD = createServerSocket(port);
   if (socketFD < 0)
     {
       perror ("Error creating socket\n");
@@ -57,7 +56,7 @@ main (int argc, char *argv[])
     }
 
   while (1) {
-	  connectionFD = acceptNewConnections (socketFD);
+	  connectionFD = acceptNewConnections(socketFD);
 	  if (connectionFD < 0)
 	  {
 		  perror ("Error establishing connection \n");
